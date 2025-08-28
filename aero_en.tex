@@ -13,6 +13,8 @@
 \usepackage{pifont}
 \usepackage{appendix}
 \setcounter{tocdepth}{3}
+\usepackage{perpage}
+\MakePerPage{footnote}
 
 % 色の定義
 \definecolor{mainblue}{RGB}{0,102,204}
@@ -67,6 +69,8 @@
 \newcommand{\rot}{\mathrm{rot}\,}  %ローテーション
 \newcommand{\diff}{\mathrm{d}} % 微分
 \newcommand{\e}{\mathbf{e}} % 単位ベクトル
+
+\def\thefootnote{\fnsymbol{footnote}}
 
 % ページスタイル
 \pagestyle{fancy}
