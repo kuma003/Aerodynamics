@@ -1,0 +1,325 @@
+\documentclass[uplatex,dvipdfmx,a4j,11pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[dvipdfmx]{graphicx,xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+\usepackage{cleveref} %参照用
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{tikz}
+\usepackage{pifont}
+\usepackage{appendix}
+\setcounter{tocdepth}{3}
+
+% 色の定義
+\definecolor{mainblue}{RGB}{0,102,204}
+\definecolor{lightblue}{RGB}{230,240,255}
+\definecolor{darkgreen}{RGB}{0,128,0}
+\definecolor{lightgreen}{RGB}{240,255,240}
+\definecolor{orange}{RGB}{255,140,0}
+\definecolor{lightorange}{RGB}{255,250,240}
+\definecolor{purple}{RGB}{128,0,128}
+\definecolor{lightpurple}{RGB}{250,240,255}
+\definecolor{darkred}{RGB}{139,0,0}
+\definecolor{lightgray}{RGB}{245,245,245}
+
+% 定義ボックス
+\newtcolorbox[auto counter, number within=chapter, crefname = {Def.}{Defs.}]{definition}[4][]{
+  enhanced,
+  colback=lightblue,
+  colframe=mainblue,
+  colbacktitle=mainblue,
+  fonttitle=\bfseries,
+  coltitle=white,
+  boxrule=1pt,
+  arc=2mm,
+  breakable,
+  enhanced,
+  title=Def.~\if #4(#4)\else \thetcbcounter\fi~ #2,
+  #1,
+  label = thm:#3
+}
+
+\newtcolorbox[auto counter, number within=chapter, crefname = {Rem.}{Rems.}]{remark}[4][]{
+  enhanced,
+  colback=lightgray,
+  colframe=darkgreen,
+  colbacktitle=darkgreen,
+  fonttitle=\bfseries,
+  coltitle=white,
+  boxrule=1pt,
+  arc=2mm,
+  breakable,
+  enhanced,
+  title=Rem.~\if #4(#4)\else \thetcbcounter\fi~ #2,
+  #1,
+  label = thm:#3
+}
+% コマンド定義
+\newcommand{\keyword}[1]{\textcolor{mainblue}{\textbf{#1}}}
+\newcommand{\important}[1]{\textcolor{darkred}{\textbf{#1}}}
+\newcommand{\highlight}[1]{\colorbox{yellow!30}{#1}}
+\newcommand{\divergence}{\mathrm{div}\,}  %ダイバージェンス
+\newcommand{\grad}{\mathrm{grad}\,}  %グラディエント
+\newcommand{\rot}{\mathrm{rot}\,}  %ローテーション
+\newcommand{\diff}{\mathrm{d}} % 微分
+\newcommand{\e}{\mathbf{e}} % 単位ベクトル
+
+% ページスタイル
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\hypersetup{
+  hidelinks,
+  bookmarksnumbered=true
+}
+
+% Equation numbering: (chapter).##
+\numberwithin{equation}{chapter}
+
+% --- Document Start ---
+
+\begin{document}
+
+\title{\Huge\textbf{Fundamentals of Aerodynamics}}
+\author{Sora Sato (14th Gen. Aero Lead)\footnotemark}
+\date{\today}
+\footnotetext{
+\begin{tabular}{@{}l@{}l@{}}
+GitHub: \qquad & \url{https://github.com/kuma003} (Univ. account) \\
+  & \url{https://github.com/kuma-1220} (Personal account)
+\end{tabular}
+}
+\maketitle
+
+\tableofcontents
+
+% --- Chapter 1 ---
+
+\chapter{Introduction}
+\section{Terminology}
+This chapter summarizes fundamental terms. Details and derivations are provided in later chapters; refer to them as needed.
+
+\subsection{Fluid Mechanics}
+Fluid mechanics is the field that investigates the mechanical behavior of liquids and gases (collectively referred to as \keyword{fluids}).
+
+\enskip
+
+Fluid flows are generally classified as \keyword{laminar flow} and \keyword{turbulent flow}. Laminar flow is characterized by smooth, orderly motion, while turbulent flow exhibits chaotic, irregular motion. More precisely, the flow regime is determined by the \keyword{Reynolds number}, a dimensionless parameter defined as the ratio of inertial to viscous forces:
+\begin{definition}{Reynolds Number}{Reynolds}{}
+  The Reynolds number is defined as:
+  \begin{equation}
+    \textit{Re} \equiv \frac{\text{inertial force}}{\text{viscous force}}
+    = \frac{\rho UL}{\mu} = \frac{UL}{\nu}
+  \end{equation}
+  where $\rho$ is the fluid density, $U$ is a characteristic velocity, $L$ is a characteristic length, $\mu$ is the dynamic viscosity, and $\nu$ is the kinematic viscosity. The choice of $U$ and $L$ depends on the specific problem; these values are for reference.
+\end{definition}
+For small $\textit{Re}$, viscous forces dominate and the flow remains laminar; for large $\textit{Re}$, inertial forces dominate and the flow tends to become turbulent. As a rule of thumb, pipe flow is laminar for $\textit{Re} < 2000$ and turbulent for $\textit{Re} > 4000$.
+
+\enskip
+
+We now turn to the governing equations. For steady, incompressible flow, the motion is described by \keyword{Bernoulli's theorem}:
+\begin{definition}{Bernoulli's Theorem}{Bernoulli}{}
+  In steady, incompressible flow, the following forms are equivalent along a streamline:
+  \begin{equation}
+  \begin{aligned}
+  \text{Pressure form}:      &\quad p + \frac{1}{2}\rho U^{2} + \rho g h = \mathrm{const.}\\
+  \text{Energy form}:&\quad \frac{p}{\rho} + \frac{1}{2} U^{2} + g h = \mathrm{const.}\\
+  \text{Head form}:      &\quad \frac{p}{\rho g} + \frac{U^{2}}{2g} + h = \mathrm{const.}
+  \end{aligned}
+  \end{equation}
+  Here, $p$ is the static pressure, $\rho$ is the fluid density, $U$ is the flow speed, $g$ is the gravitational acceleration, and $h$ is the elevation above a reference level.
+  In the first equation, $p$ is the \keyword{static pressure}, $\frac{1}{2}\rho U^{2}$ is the \keyword{dynamic pressure}. In the third, $\frac{p}{\rho g}$ is the \keyword{pressure head}, $\frac{U^{2}}{2g}$ is the \keyword{velocity head}, and $h$ is the \keyword{elevation head}.
+\end{definition}
+
+For a body placed in a flow, the velocity at the surface becomes zero (a \keyword{stagnation point}). According to Bernoulli's theorem, dynamic pressure is converted to static pressure, so the body experiences a pressure rise of approximately $\frac{1}{2}\rho U^{2}$, known as the \keyword{stagnation pressure}.
+
+\enskip
+
+For more general cases (unsteady, compressible, or viscous flows), the motion is governed by the \keyword{Navier--Stokes equations}:
+\begin{definition}{Navier--Stokes Equations}{NSE}{}
+  The Navier--Stokes equations, derived from the conservation of mass, momentum, and energy, are given by:
+  \begin{equation}
+  \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla) \mathbf{u} = -\frac{1}{\rho} \nabla p + \nu \nabla^{2} \mathbf{u} + \mathbf{g}
+  \end{equation}
+  where $\mathbf{u}$ is the velocity vector, $p$ is the pressure, $\rho$ is the density, $\nu$ is the kinematic viscosity, and $\mathbf{g}$ represents body forces.
+\end{definition}
+Analytical solutions are rarely available due to the nonlinearity of these equations; numerical (computational) methods are standard practice.
+
+% --- Aerodynamics Section ---
+
+\subsection{Aerodynamics}
+A vehicle (hereafter, "body") moving through air is subject to aerodynamic forces generated by the surrounding flow. The study of the origins and effects of these forces is called \keyword{aerodynamics}. Here, we introduce basic terminology; detailed derivations are provided in later sections.
+
+\enskip
+
+The principal aerodynamic forces acting on a body are \keyword{drag}, which acts parallel to the freestream, and \keyword{lift}, which acts perpendicular to it. These can also be decomposed into the body axis (\keyword{axial force}) and its normal (\keyword{normal force}).
+
+As previously noted, the surface of a body in a flow is subject to stagnation pressure $\frac{1}{2}\rho U^{2}$. Integrating this pressure over the surface yields the net aerodynamic force. In practice, the force magnitude is typically proportional to the dynamic pressure $\frac{1}{2}\rho U^{2}$.
+\footnote{Strictly, this is an approximation. According to Bernoulli's theorem, the surface integral of pressure is zero for an inviscid, incompressible, steady flow. This is known as \keyword{d'Alembert's paradox}. Resolution requires accounting for viscosity and/or compressibility via the Navier--Stokes equations.}
+
+To compare forces across different conditions, it is standard to nondimensionalize them using dynamic pressure and a reference area:
+\begin{definition}{Force Coefficient}{ForceCoeff}{}
+  The \keyword{drag coefficient} $C_D$ and \keyword{normal force coefficient} $C_N$ are defined as:
+  \begin{equation}
+    C_D = \frac{D}{\frac{1}{2}\rho U^{2}A}, \quad C_N = \frac{N}{\frac{1}{2}\rho U^{2}A}
+  \end{equation}
+  where $D$ is drag, $N$ is normal force, $\rho$ is density, $U$ is velocity, and $A$ is a reference area. The same form applies to axial and lift coefficients. $A$ is typically the projected frontal area, or for wings, the planform area.
+\end{definition}
+
+Lift and normal force depend on the body's orientation, especially the \keyword{angle of attack} $\alpha$. For small $\alpha$, $C_N$ is approximately linear in $\alpha$:
+\begin{definition}{Normal Force Slope}{ForceSlope}{}
+  The \keyword{normal force coefficient slope} is defined as:
+  \begin{equation}
+    C_{N\alpha} = \frac{C_N}{\alpha}
+  \end{equation}
+  where $\alpha$ is in radians (dimensionless). Thus, $C_{N\alpha}$ is also dimensionless. For small $\alpha$, $C_N \approx C_{N\alpha}\,\alpha$.
+\end{definition}
+
+\enskip
+
+Moments are similarly nondimensionalized:
+\begin{definition}{Moment Coefficient}{MomentCoeff}{}
+  The moment coefficient is defined as:
+  \begin{equation}
+    C_M = \frac{M}{\frac{1}{2}\rho U^{2}A L}
+  \end{equation}
+  where $M$ is moment and $L$ is a reference length.
+\end{definition}
+
+In rockets, moments arise from fin misalignment, engine thrust, and especially from the distribution of normal force. The point of application of the resultant normal force is called the \keyword{center of pressure} (CP). The relationship between the center of pressure and the center of gravity (CG) determines the pitching moment.
+\begin{definition}{Center of Pressure}{CP}{}
+  The center of pressure is defined as:
+  \begin{equation}
+    C_\mathrm{P} = \frac{\int N(x)x\,\diff x}{\int N(x)\,\diff x}
+  \end{equation}
+  where the integral is along the body axis and $N(x)$ is the normal force distribution. For discrete components $i$ (nose, body, fins, etc.):
+  \begin{equation}
+    C_\mathrm{P} = \frac{\sum_i N_i C_{\mathrm{P}i}}{\sum_i N_i}
+  \end{equation}
+\end{definition}
+
+\begin{remark}{Center of Gravity}{CG}{}
+  The center of gravity is defined as:
+  \begin{equation}
+    C_\mathrm{G} = \frac{\int \lambda(x)x\,\diff x}{\int \lambda(x)\,\diff x}
+  \end{equation}
+  where $\lambda(x)$ is the linear mass density.
+\end{remark}
+
+The \keyword{stability margin} is a key parameter for rocket stability:
+\begin{definition}{Stability Margin}{StabilityMargin}{}
+  The stability margin is defined as:
+  \begin{equation}
+    \text{Stability Margin} = \frac{C_\mathrm{P} - C_\mathrm{G}}{L}
+  \end{equation}
+  where $L$ is the total length of the vehicle. Both $C_\mathrm{P}$ and $C_\mathrm{G}$ are measured from the nose tip.
+\end{definition}
+For static stability, the center of pressure must be aft of the center of gravity (positive margin). Excessive margin increases the \emph{weathercock effect}, making the rocket overly sensitive to crosswinds. A margin of about 10--20\% is often recommended.
+
+\enskip
+
+A moment that opposes angular motion is called a \keyword{damping moment}. All previous discussions assumed static effects; damping moments are dynamic and depend on the vehicle's motion history.
+\footnote{This arises from the nonlinearity of the Navier--Stokes equations.}
+
+The general form of the damping moment coefficient, as well as typical pitch/yaw and roll damping coefficients for rockets, are as follows:
+\begin{definition}{Damping Moment Coefficient}{DampingCoeff}{}
+  In general, the damping moment coefficient is defined as:
+  \begin{equation}
+  C_{m\dot{\theta}} = \frac{4}{\rho v^2 S L}\frac{v}{L}\frac{\partial M}{\partial\dot{\theta}} \label{fte_def}
+  \end{equation}
+  For rockets, the pitch/yaw damping coefficient $C_{mq}$ and roll damping coefficient $C_{mp}$ are:
+  \begin{align}
+    C_{mq} &= - 4 \sum_i \left(\frac{C_{n\alpha i}}{2}\right)\left(\frac{C_{pi} - C_{g}}{L}\right)^2,\\
+    C_{mp} &= - 8 \times \frac{\left(\mathrm{span} + d/2\right)^4}{\pi L^2 \left(\frac{\pi d^2}{4}\right)}.
+  \end{align}
+\end{definition}
+
+\enskip
+
+Nonlinear effects can also cause aeroelastic instabilities such as \keyword{flutter}, in which the wings oscillate. Above a certain speed, this oscillation can grow and ultimately lead to structural failure.
+
+\subsection{Numerical Analysis}
+% --- Fluid Mechanics Chapter ---
+
+\chapter{Fluid Mechanics}
+
+\section{Navier--Stokes Equations}
+\subsection{Sketch Derivation}
+% This section will provide a concise derivation of the Navier--Stokes equations, starting from the fundamental conservation laws. (Content to be added.)
+
+\subsection{Bernoulli's Theorem}
+% This section will discuss the derivation and physical meaning of Bernoulli's theorem in the context of inviscid, incompressible flow. (Content to be added.)
+
+\subsection{Boundary Layer and Reynolds Number}
+% This section will introduce the concept of the boundary layer and its relationship to the Reynolds number, following the standard treatment in fluid mechanics texts. (Content to be added.)
+
+\section{Potential Flow}
+% This section will cover the basics of potential flow theory, including assumptions and typical solutions. (Content to be added.)
+
+% --- Aerodynamics Chapter ---
+
+\chapter{Aerodynamics}
+
+\section{Potential Flow, Drag and Lift}
+\subsection{Drag and d'Alembert's Paradox}
+% This section will explain the origin of drag in potential flow and the statement of d'Alembert's paradox. (Content to be added.)
+
+\subsection{Circulation and Lift}
+% This section will discuss the role of circulation in lift generation, referencing the Kutta–Joukowski theorem. (Content to be added.)
+
+\section{Barrowman Method}
+\subsection{Normal Force}
+% This section will describe the calculation of normal force using the Barrowman method. (Content to be added.)
+\subsection{Center of Pressure}
+% This section will describe the determination of the center of pressure using the Barrowman method. (Content to be added.)
+
+\section{Supersonic Aerodynamics}
+\subsection{Speed of Sound and Mach Number}
+% This section will introduce the concepts of the speed of sound and Mach number, and their significance in compressible flow. (Content to be added.)
+
+\subsection{Prandtl--Glauert Transformation}
+% This section will explain the Prandtl--Glauert transformation and its application to compressible flows. (Content to be added.)
+
+\subsection{Choked Flow}
+% This section will discuss the phenomenon of choked flow in nozzles and ducts. (Content to be added.)
+
+% --- Numerical Analysis Chapter ---
+
+\chapter{Numerical Analysis}
+
+\section{Basics of CFD}
+\subsection{Numerical Schemes}
+% This section will outline basic numerical schemes used in computational fluid dynamics. (Content to be added.)
+
+\section{Flight Simulation Fundamentals}
+\subsection{Equations of Motion}
+% This section will introduce the equations of motion for flight simulation. (Content to be added.)
+
+\appendix
+
+\chapter{Mathematical Supplements}
+\section{Quaternions}
+% This section will provide an overview of quaternions and their application in aerospace engineering. (Content to be added.)
+
+\chapter{Basics of Strength of Materials}
+% This chapter will introduce the fundamentals of strength of materials. (Content to be added.)
+
+\chapter{Basics of Homemade Engines}
+\section{Hybrid Engine Combustion Theory}
+% This section will discuss the theory of combustion in hybrid rocket engines. (Content to be added.)
+\section{Flow Coefficient}
+% This section will explain the concept of flow coefficient in propulsion. (Content to be added.)
+\section{Nozzle Theory}
+% This section will cover the fundamentals of nozzle theory. (Content to be added.)
+
+\bibliography{bib/ref}
+\bibliographystyle{junsrt}
+
+\end{document}

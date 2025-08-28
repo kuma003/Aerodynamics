@@ -1,0 +1,22 @@
+{
+    // Automatically clean up auxiliary files after building
+    // Set to "never" to disable, or "onBuilt" / "onSucceeded" for automatic cleanup
+    "latex-workshop.latex.autoClean.run": "onBuilt",
+    "latex-workshop.latex.clean.method": "glob",
+
+    // export output files to out directory
+    "latex-workshop.latex.outDir": "docs",
+    "latex-workshop.latex.recipes": [
+        {
+        "name": "latexmk",
+        "tools": ["latexmk"]
+        }
+        ],
+    "latex-workshop.latex.tools": [
+        {
+        "name": "latexmk",
+        "command": "latexmk",
+        "args": ["-silent", "-outdir=%OUTDIR%", "%DOC%", ]
+        }
+    ],
+    }
