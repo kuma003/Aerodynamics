@@ -48,7 +48,9 @@
 }
 
 \title{減衰モーメント係数について}
-\date{}
+\date{
+  ver.1.1: 2025/08/29
+}
 \author{佐藤 空馬 (14期代空力班長)}
 
 \begin{document}
@@ -92,7 +94,7 @@ magnitude is required.
 \begin{equation}
   C_{m\dot{\theta}} = \frac{4}{\rho v^2 S L}\frac{v}{L}\frac{\partial M}{\partial\dot{\theta}} \label{fte_def}
 \end{equation}
-であって, ピッチ・ヨー減衰モーメント係数$C_{mq}$, ロール減衰モーメント係数$C{mp}$は (再掲):
+であって, ピッチ・ヨー減衰モーメント係数$C_{mq}$, ロール減衰モーメント係数$C_{mp}$は (再掲):
 \begin{gather*}
   C_{mq} = - 4 \sum_i \left(\frac{C_{n\alpha i}}{2}\right)\left(\frac{C_{pi} - C_{g}}{L}\right)^2,\tag{\ref{pitch_damping_coef}}\\
   C_{mp} = - 8 \times \cfrac{\left(\mathrm{span} + d/2\right)^4}{\pi L^2 \cfrac{\pi d^2}{4}} \tag{\ref{roll_damping_coef}}
@@ -303,7 +305,7 @@ $X = X_c$における$X$軸方向単位長さあたりの運動エネルギー$T
 
 ここで注目すべきは, 位置$X$に依存するはずの$A_{ij}$が依存せずに一定になるという点です.
 
-さらに, 十字翼・円筒体 (cruciform wing, circular body) における見かけの質量 は以下のようになります.
+さらに, 十字翼・円筒体 (cruciform wing, circular body) における見かけの質量は以下のようになります.
 \begin{equation}
   \left\{ 
   \begin{alignedat}{2}
@@ -421,5 +423,20 @@ Nielsen \cite{nielsen1988missile} から図を引用すると, 図\ref{damping_v
 
 \bibliography{damping_moment/bib/ref}
 \bibliographystyle{junsrt}
+
+\newpage
+
+\section*{改訂歴}
+
+\begin{center}
+  \begin{tabular}{cccl}
+    \hline
+    改訂番号 & 日付 & 執筆者 & 主な変更点\\
+    \hline \hline
+    1.0 & 2024/11/01 & 佐藤 & 新規作成\\
+    1.1 & 2025/08/29 & 佐藤 & 誤字修正，改訂歴の追加\\
+    \hline
+  \end{tabular}
+\end{center}
 
 \end{document}
