@@ -15,6 +15,10 @@
 \setcounter{tocdepth}{3}
 \usepackage{perpage}
 \MakePerPage{footnote}
+\usepackage{wrapfig}
+\usepackage{here}
+\usepackage[hang,small,bf]{caption}
+\usepackage[subrefformat=parens]{subcaption}
 
 % 色の定義
 \definecolor{mainblue}{RGB}{0,102,204}
@@ -103,6 +107,13 @@
 
 % 式番号を (章).## 形式にする
 \numberwithin{equation}{chapter}
+
+% cleverefの日本語化
+\crefname{figure}{図}{図}
+\crefname{equation}{式}{式}
+\crefname{table}{表}{表}
+\crefname{chapter}{章}{章}
+\crefname{section}{節}{節}
 
 \begin{document}
 
@@ -197,9 +208,26 @@ GitHub: \qquad & \url{https://github.com/kuma003} (Univ. account) \\
 \enskip
 
 まず，飛翔体に作用する力を整理しよう．
-以下に示すように，飛翔体には流れ方向に\keyword{抗力} (Drag force) が，流れに垂直な方向に\keyword{揚力} (Lift force) が作用する．
-一方で，これらの力を機軸方向とそれに垂直な方向にも分解することができる．
+以下に示すように，飛翔体には流れ方向に\keyword{抗力} (Drag force) が，流れに垂直な方向に\keyword{揚力} (Lift force) が作用する (\cref{fig:drag_lift})．
+一方で，これらの力を機軸方向とそれに垂直な方向にも分解することができる (\cref{fig:axial_normal})．
 これら方向の力をそれぞれ \keyword{軸力} (Axial force) と \keyword{法線力} (Normal force) と呼ぶ．
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}{\hsize}
+    \centering
+    \includegraphics{aero/img/drag_lift.pdf}
+    \subcaption{抗力と揚力．}
+    \label{fig:drag_lift}
+  \end{minipage}\\
+  \begin{minipage}{\hsize}
+    \centering
+    \includegraphics{aero/img/axial_normal.pdf}
+    \subcaption{軸力と法線力．}
+    \label{fig:axial_normal}
+  \end{minipage}
+  \caption{大気中を飛翔する物体に作用する力．}
+\end{figure}
 
 
 先に述べたように，流れ場に置かれた物体表面にはよどみ圧$\frac{1}{2}\rho U^{2}$が作用する．
