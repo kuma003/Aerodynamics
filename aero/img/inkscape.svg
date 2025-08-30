@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="inkscape.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="11.307843"
+     inkscape:cx="303.41771"
+     inkscape:cy="647.16142"
+     inkscape:window-width="3840"
+     inkscape:window-height="2126"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showgrid="true">
+    <inkscape:grid
+       id="grid19"
+       units="mm"
+       originx="0"
+       originy="0"
+       spacingx="0.26458333"
+       spacingy="0.26458334"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs1">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="8.4666664 : 163.44896 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="169.91563 : 166.35938 : 1"
+       inkscape:persp3d-origin="105 : 99 : 1"
+       id="perspective1" />
+    <rect
+       x="226.63245"
+       y="123.18611"
+       width="111.69207"
+       height="134.68015"
+       id="rect70" />
+    <rect
+       x="349.31882"
+       y="131.18196"
+       width="209.39139"
+       height="60.718507"
+       id="rect62" />
+    <marker
+       style="overflow:visible"
+       id="Triangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="0.75"
+       markerHeight="0.75"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135"
+         transform="scale(0.5)" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="ConcaveTriangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Concave triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.7)"
+         d="M -2,-4 9,0 -2,4 c 2,-2.33 2,-5.66 0,-8 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         id="path60" />
+    </marker>
+    <linearGradient
+       id="swatch19"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop20" />
+    </linearGradient>
+    <rect
+       x="106.71777"
+       y="115.55203"
+       width="260.78714"
+       height="246.29897"
+       id="rect9" />
+    <marker
+       style="overflow:visible"
+       id="ArrowWideRounded"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Wide, rounded arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:round"
+         d="M 3,-3 0,0 3,3"
+         transform="rotate(180,0.125,0)"
+         sodipodi:nodetypes="ccc"
+         id="path7" />
+    </marker>
+    <linearGradient
+       id="swatch6"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop6" />
+    </linearGradient>
+    <marker
+       style="overflow:visible"
+       id="ArrowWideRounded-5"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Wide, rounded arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:round"
+         d="M 3,-3 0,0 3,3"
+         transform="rotate(180,0.125,0)"
+         sodipodi:nodetypes="ccc"
+         id="path7-1" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="ArrowWideRounded-2"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Wide, rounded arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:round"
+         d="M 3,-3 0,0 3,3"
+         transform="rotate(180,0.125,0)"
+         sodipodi:nodetypes="ccc"
+         id="path7-7" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text9"
+       style="font-size:10.6667px;line-height:1.25;font-family:'Source Han Sans HC VF';-inkscape-font-specification:'Source Han Sans HC VF';text-align:center;white-space:pre;shape-inside:url(#rect9);display:inline" />
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text62"
+       style="font-size:14.6667px;line-height:1.25;font-family:'Source Han Sans HC VF';-inkscape-font-specification:'Source Han Sans HC VF';text-align:center;white-space:pre;shape-inside:url(#rect62);display:inline" />
+    <g
+       id="g86"
+       inkscape:export-filename="drag_lift.pdf"
+       inkscape:export-xdpi="800"
+       inkscape:export-ydpi="800">
+      <g
+         id="g5"
+         transform="matrix(0.82497014,0.29453883,-0.29453883,0.82497014,70.668245,-13.284829)"
+         style="stroke-width:0.60409009;stroke-dasharray:none;fill:#ffffff;fill-opacity:1;stroke:#262626;stroke-opacity:1">
+        <path
+           style="fill:#ffffff;stroke:#262626;stroke-width:0.60409009;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+           d="m 130.25049,28.933551 v -6.604946 l -12.96103,6.604946"
+           id="path4"
+           sodipodi:nodetypes="ccc" />
+        <path
+           style="fill:#ffffff;stroke:#262626;stroke-width:0.60409009;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+           d="m 130.25049,41.095029 v 6.604946 l -12.96103,-6.604946"
+           id="path5"
+           sodipodi:nodetypes="ccc" />
+        <path
+           style="fill:#ffffff;stroke:#262626;stroke-width:0.60409009;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+           d="M 60.742601,28.933551 V 41.095029 H 130.25049 V 28.933551 Z"
+           id="path2"
+           sodipodi:nodetypes="ccccc" />
+        <path
+           style="fill:#ffffff;stroke:#262626;stroke-width:0.60409009;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
+           d="M 60.742601,28.933551 42.628225,35.01429 60.742601,41.095029"
+           id="path3"
+           sodipodi:nodetypes="ccc" />
+      </g>
+      <path
+         style="fill:none;stroke:#2b2b2b;stroke-width:0.661458;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWideRounded)"
+         d="M 75.748961,46.439132 H 92.804349"
+         id="path8" />
+      <path
+         style="fill:none;stroke:#2b2b2b;stroke-width:0.661458;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWideRounded-5)"
+         d="M 75.74896,54.669075 H 92.804349"
+         id="path8-1" />
+      <path
+         style="fill:none;stroke:#2b2b2b;stroke-width:0.661458;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWideRounded-2)"
+         d="M 75.74896,38.20919 H 92.804349"
+         id="path8-14" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.88056px;line-height:1.05;font-family:'Source Han Sans HC VF';-inkscape-font-specification:'Source Han Sans HC VF';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="104.60776"
+         y="52.645149"
+         id="text8"><tspan
+           sodipodi:role="line"
+           id="tspan8"
+           style="font-size:3.88056px;line-height:1.05;stroke-width:0.264583"
+           x="104.60776"
+           y="52.645149">（相対的な）</tspan><tspan
+           sodipodi:role="line"
+           style="font-size:3.88056px;line-height:1.05;stroke-width:0.264583"
+           x="104.60776"
+           y="56.99931"
+           id="tspan9">風の向き</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.44979167;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 128.01987,39.649912 -26.88288,0"
+         id="path57"
+         sodipodi:nodetypes="cc" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.88056px;line-height:1.25;font-family:'Source Han Sans HC VF';-inkscape-font-specification:'Source Han Sans HC VF';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="91.09375"
+         y="21.92033"
+         id="text60"><tspan
+           sodipodi:role="line"
+           id="tspan60"
+           style="font-size:3.88056px;stroke-width:0.264583"
+           x="91.09375"
+           y="21.92033">機軸方向</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.88056px;line-height:1.25;font-family:'Source Han Sans HC VF';-inkscape-font-specification:'Source Han Sans HC VF';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="109.00155"
+         y="43.78437"
+         id="text61"><tspan
+           sodipodi:role="line"
+           id="tspan61"
+           style="stroke-width:0.264583"
+           x="109.00155"
+           y="43.78437">迎角</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.632788;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:0.632788, 0.632788;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ConcaveTriangle)"
+         d="M 176.54323,56.974191 90.102481,26.112278"
+         id="path59"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#464646;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:0.529167, 0.264583;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 152.19608,43.804597 0.20543,-23.964874 -12.75244,0.03362"
+         id="path66"
+         sodipodi:nodetypes="ccc" />
+      <g
+         id="g56"
+         transform="matrix(0.6410729,0,0,0.6410729,124.56188,25.678054)"
+         style="stroke-width:0.825439;stroke-dasharray:none">
+        <g
+           id="g70"
+           transform="translate(-35.04849,12.794574)"
+           style="stroke-width:1.03179893;stroke-dasharray:none">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.23816;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Triangle)"
+             d="M 58.141457,15.742862 76.867602,-18.989721"
+             id="path64"
+             sodipodi:nodetypes="cc" />
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.0318;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Triangle);marker-end:url(#Triangle)"
+             d="m 75.461315,15.742862 -16.985509,-0.30454 0.07292,-34.505419"
+             id="path65"
+             sodipodi:nodetypes="ccc" />
+        </g>
+        <circle
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.825439;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+           id="path10"
+           cx="6.5430088"
+           cy="21.794491"
+           r="2.4321527" />
+        <path
+           style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.825439;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+           d="m 4.1108542,21.794492 h 4.864306 c -0.184474,1.526836 -0.995192,2.337553 -2.432153,2.432152 v -4.864305 c -1.358692,0.02179 -2.16941,0.832505 -2.432153,2.432153 z"
+           id="path56"
+           sodipodi:nodetypes="ccccc" />
+      </g>
+      <g
+         id="g62"
+         transform="matrix(0.6410729,0,0,0.6410729,110.77632,36.401318)"
+         style="stroke-width:0.825439;stroke-dasharray:none">
+        <circle
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.825439;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+           id="circle62"
+           cx="44.901279"
+           cy="11.505953"
+           r="2.4321527" />
+        <circle
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.825439;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+           id="circle63"
+           r="1.3730791"
+           cy="11.505953"
+           cx="44.901279" />
+      </g>
+      <path
+         style="fill:none;stroke:#2b2b2b;stroke-width:0.661458;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWideRounded-2)"
+         d="M 75.74896,38.20919 H 92.804349"
+         id="path63" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.88056px;line-height:1.25;font-family:'Source Han Sans HC VF';-inkscape-font-specification:'Source Han Sans HC VF';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="133.71631"
+         y="23.498312"
+         id="text66"><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="133.71631"
+           y="23.498312"
+           id="tspan67">揚力</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.88056px;line-height:1.25;font-family:'Source Han Sans HC VF';-inkscape-font-specification:'Source Han Sans HC VF';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="157.18591"
+         y="42.009544"
+         id="text68"><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="157.18591"
+           y="42.009544"
+           id="tspan69">抗力</tspan></text>
+      <path
+         style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ConcaveTriangle);paint-order:fill markers stroke"
+         id="path70"
+         sodipodi:type="arc"
+         sodipodi:cx="128.01987"
+         sodipodi:cy="39.649914"
+         sodipodi:rx="18.084688"
+         sodipodi:ry="10.162446"
+         sodipodi:start="3.1483577"
+         sodipodi:end="3.5487592"
+         sodipodi:arc-type="arc"
+         d="m 109.93559,39.581165 a 18.084688,10.162446 0 0 1 1.47807,-3.955672"
+         sodipodi:open="true" />
+    </g>
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text70"
+       style="font-size:14.6667px;line-height:1.25;font-family:'Source Han Sans HC VF';-inkscape-font-specification:'Source Han Sans HC VF';text-align:center;white-space:pre;shape-inside:url(#rect70);display:inline" />
+    <g
+       id="g101"
+       transform="translate(0,57.499942)">
+      <g
+         id="g89"
+         transform="matrix(0.82497014,0.29453883,-0.29453883,0.82497014,70.668245,-13.284829)"
+         style="fill:#ffffff;fill-opacity:1;stroke:#262626;stroke-width:0.60409;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:export-filename="axial_normal.pdf"
+         inkscape:export-xdpi="800"
+         inkscape:export-ydpi="800">
+        <path
+           style="fill:#ffffff;fill-opacity:1;stroke:#262626;stroke-width:0.60409;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+           d="m 130.25049,28.933551 v -6.604946 l -12.96103,6.604946"
+           id="path86"
+           sodipodi:nodetypes="ccc" />
+        <path
+           style="fill:#ffffff;fill-opacity:1;stroke:#262626;stroke-width:0.60409;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+           d="m 130.25049,41.095029 v 6.604946 l -12.96103,-6.604946"
+           id="path87"
+           sodipodi:nodetypes="ccc" />
+        <path
+           style="fill:#ffffff;fill-opacity:1;stroke:#262626;stroke-width:0.60409;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+           d="M 60.742601,28.933551 V 41.095029 H 130.25049 V 28.933551 Z"
+           id="path88"
+           sodipodi:nodetypes="ccccc" />
+        <path
+           style="fill:#ffffff;fill-opacity:1;stroke:#262626;stroke-width:0.60409;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+           d="M 60.742601,28.933551 42.628225,35.01429 60.742601,41.095029"
+           id="path89"
+           sodipodi:nodetypes="ccc" />
+      </g>
+      <path
+         style="fill:none;stroke:#2b2b2b;stroke-width:0.661458;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWideRounded)"
+         d="M 75.748961,46.439132 H 92.804349"
+         id="path90" />
+      <path
+         style="fill:none;stroke:#2b2b2b;stroke-width:0.661458;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWideRounded-5)"
+         d="M 75.74896,54.669075 H 92.804349"
+         id="path91" />
+      <path
+         style="fill:none;stroke:#2b2b2b;stroke-width:0.661458;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWideRounded-2)"
+         d="M 75.74896,38.20919 H 92.804349"
+         id="path92" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.88056px;line-height:1.05;font-family:'Source Han Sans HC VF';-inkscape-font-specification:'Source Han Sans HC VF';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="104.60776"
+         y="52.645149"
+         id="text93"><tspan
+           sodipodi:role="line"
+           id="tspan92"
+           style="font-size:3.88056px;line-height:1.05;stroke-width:0.264583"
+           x="104.60776"
+           y="52.645149">（相対的な）</tspan><tspan
+           sodipodi:role="line"
+           style="font-size:3.88056px;line-height:1.05;stroke-width:0.264583"
+           x="104.60776"
+           y="56.99931"
+           id="tspan93">風の向き</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.449792;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="M 128.01987,39.649912 H 101.13699"
+         id="path93"
+         sodipodi:nodetypes="cc" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.88056px;line-height:1.25;font-family:'Source Han Sans HC VF';-inkscape-font-specification:'Source Han Sans HC VF';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="91.09375"
+         y="21.92033"
+         id="text94"><tspan
+           sodipodi:role="line"
+           id="tspan94"
+           style="font-size:3.88056px;stroke-width:0.264583"
+           x="91.09375"
+           y="21.92033">機軸方向</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:3.88056px;line-height:1.25;font-family:'Source Han Sans HC VF';-inkscape-font-specification:'Source Han Sans HC VF';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="109.00155"
+         y="43.78437"
+         id="text95"><tspan
+           sodipodi:role="line"
+           id="tspan95"
+           style="stroke-width:0.264583"
+           x="109.00155"
+           y="43.78437">迎角</tspan></text>
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.632788;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:0.632788, 0.632788;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ConcaveTriangle)"
+         d="M 176.54323,56.974191 90.102481,26.112278"
+         id="path95"
+         sodipodi:nodetypes="cc" />
+      <path
+         style="fill:none;stroke:#464646;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:0.529167, 0.264583;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 143.70288,45.249212 8.33633,-24.719957 -3.68334,-1.415565"
+         id="path96"
+         sodipodi:nodetypes="ccc" />
+      <g
+         id="g99"
+         transform="matrix(0.6410729,0,0,0.6410729,124.56188,25.678054)"
+         style="stroke-width:0.825439;stroke-dasharray:none">
+        <g
+           id="g98"
+           transform="translate(-35.04849,12.794574)">
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.23816;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Triangle)"
+             d="M 58.141457,15.742862 76.274625,-17.855331"
+             id="path97"
+             sodipodi:nodetypes="cc" />
+          <path
+             style="fill:none;stroke:#000000;stroke-width:1.0318;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Triangle);marker-end:url(#Triangle)"
+             d="m 62.738344,16.960174 -4.341777,-1.550143 12.76157,-36.201728"
+             id="path98"
+             sodipodi:nodetypes="ccc" />
+        </g>
+        <circle
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.825439;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+           id="circle98"
+           cx="6.5430088"
+           cy="21.794491"
+           r="2.4321527" />
+        <path
+           style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.825439;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+           d="m 4.1108542,21.794492 h 4.864306 c -0.184474,1.526836 -0.995192,2.337553 -2.432153,2.432152 v -4.864305 c -1.358692,0.02179 -2.16941,0.832505 -2.432153,2.432153 z"
+           id="path99"
+           sodipodi:nodetypes="ccccc" />
+      </g>
+      <g
+         id="g100"
+         transform="matrix(0.6410729,0,0,0.6410729,110.77632,36.401318)"
+         style="stroke-width:0.825439;stroke-dasharray:none">
+        <circle
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.825439;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+           id="circle99"
+           cx="44.901279"
+           cy="11.505953"
+           r="2.4321527" />
+        <circle
+           style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.825439;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+           id="circle100"
+           r="1.3730791"
+           cy="11.505953"
+           cx="44.901279" />
+      </g>
+      <path
+         style="fill:none;stroke:#2b2b2b;stroke-width:0.661458;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ArrowWideRounded-2)"
+         d="M 75.74896,38.20919 H 92.804349"
+         id="path100" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.88056px;line-height:1.25;font-family:'Source Han Sans HC VF';-inkscape-font-specification:'Source Han Sans HC VF';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="137.54964"
+         y="27.847162"
+         id="text100"><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="137.54964"
+           y="27.847162"
+           id="tspan103">法線力</tspan></text>
+      <path
+         style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#ConcaveTriangle);paint-order:fill markers stroke"
+         id="path101"
+         sodipodi:type="arc"
+         sodipodi:cx="128.01987"
+         sodipodi:cy="39.649914"
+         sodipodi:rx="18.084688"
+         sodipodi:ry="10.162446"
+         sodipodi:start="3.1483577"
+         sodipodi:end="3.5487592"
+         sodipodi:arc-type="arc"
+         d="m 109.93559,39.581165 a 18.084688,10.162446 0 0 1 1.47807,-3.955672"
+         sodipodi:open="true" />
+      <text
+         xml:space="preserve"
+         style="font-size:3.88056px;line-height:1.25;font-family:'Source Han Sans HC VF';-inkscape-font-specification:'Source Han Sans HC VF';text-align:center;text-anchor:middle;stroke-width:0.264583"
+         x="144.51114"
+         y="49.695621"
+         id="text104"><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="144.51114"
+           y="49.695621"
+           id="tspan104">軸力</tspan></text>
+    </g>
+    <rect
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.266679;stroke-linejoin:round;stroke-dasharray:none;paint-order:fill markers stroke"
+       id="rect19"
+       width="17.604612"
+       height="16.550522"
+       x="78.034515"
+       y="169.99762"
+       ry="0" />
+    <rect
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.266679;stroke-linejoin:round;stroke-dasharray:none;paint-order:fill markers stroke"
+       id="rect19-7"
+       width="17.604612"
+       height="16.550522"
+       x="86.641212"
+       y="166.68752"
+       ry="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.266679;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 78.048481,170.09955 8.592735,-3.41204"
+       id="path21" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.266679;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 95.639127,186.54814 8.606703,-3.31011"
+       id="path22" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.266679;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 78.034514,186.54814 8.606702,-3.31011"
+       id="path23" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.266679;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="m 95.639127,169.99762 8.606703,-3.31011"
+       id="path24" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.582083;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Triangle)"
+       d="m 75.406248,177.27084 5.027083,0"
+       id="path25"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#dbdbdb;fill-opacity:0.60000002;fill-rule:evenodd;stroke:#000000;stroke-width:0.1375;stroke-linejoin:round;stroke-dasharray:none;paint-order:fill markers stroke"
+       d="m 362.00138,673.576 0.001,-30.701 15.68987,-6.03125 c 8.62943,-3.31719 15.71634,-6.04064 15.74869,-6.05211 0.0367,-0.013 0.0529,11.51851 0.0431,30.68457 l -0.0157,30.70542 -15.375,5.91064 c -8.45625,3.25085 -15.53672,5.97231 -15.73438,6.04768 L 362,704.27699 Z"
+       id="path27"
+       transform="scale(0.26458333)" />
+    <path
+       style="fill:#c9c9c9;fill-opacity:0.80036998;fill-rule:evenodd;stroke:#000000;stroke-width:0.137571;stroke-linejoin:round;stroke-dasharray:none;paint-order:fill markers stroke"
+       d="m 298.84955,641.96108 c 0.0202,-0.0202 26.85848,-10.69415 27.92923,-11.10787 l 0.1407,-0.0544 v 5.5951 5.59511 h -14.04895 c -7.72693,0 -14.03636,-0.0126 -14.02098,-0.028 z"
+       id="path28"
+       transform="scale(0.26458333)" />
+    <path
+       style="fill:#c9c9c9;fill-opacity:0.60000002;fill-rule:evenodd;stroke:#000000;stroke-width:0.137571;stroke-linejoin:round;stroke-dasharray:none;paint-order:fill markers stroke"
+       d="m 295.46567,673.78978 v -30.49199 l 0.28658,-0.12284 c 0.28227,-0.12099 0.51863,-0.12284 15.7269,-0.12284 h 15.44033 v 24.56455 24.56456 l -15.67162,6.02943 c -8.61939,3.31619 -15.69649,6.03881 -15.7269,6.05027 -0.032,0.0121 -0.0553,-12.83281 -0.0553,-30.47114 z"
+       id="path29"
+       transform="scale(0.26458333)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.582083;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Triangle)"
+       d="m 99.747914,177.27084 h 6.879166"
+       id="path30" />
+    <rect
+       style="fill:#dbdbdb;fill-opacity:0.6;fill-rule:evenodd;stroke:#000000;stroke-width:0.582083;stroke-linejoin:round;stroke-dasharray:none;paint-order:fill markers stroke"
+       id="rect30"
+       width="8.9958334"
+       height="3.9687502"
+       x="53.445831"
+       y="156.36874" />
+  </g>
+</svg>

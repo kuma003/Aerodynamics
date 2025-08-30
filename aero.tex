@@ -1,7 +1,7 @@
 \documentclass[uplatex,dvipdfmx,a4j,11pt]{jsreport}
 \usepackage[utf8]{inputenc}
 \usepackage[dvipdfmx]{graphicx,xcolor}
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath, amssymb, amsfonts, latexsym, mathtools}
 \usepackage{amsthm}
 \usepackage{hyperref}
 \usepackage{tcolorbox}
@@ -311,7 +311,7 @@ GitHub: \qquad & \url{https://github.com/kuma003} (Univ. account) \\
 \end{remark}
 
 ロケットの安定性を議論するときに用いられる安定比は，以下のように定義される．
-\begin{definition}{安定比}{}
+\begin{definition}{安定比}{}{}
   ロケットにおける安定比とは，圧力中心と重心の位置関係を示す指標であり，以下のように定義される．
     \begin{equation}
       \text{Stability Margin} \equiv \frac{C_\mathrm{P} - C_\mathrm{G}}{L}
@@ -353,7 +353,7 @@ GitHub: \qquad & \url{https://github.com/kuma003} (Univ. account) \\
 
 \subsection{数値解析}
 先に述べたように，ナビエ--ストークス方程式は非線形であるため解析的に解くことは困難であり，数値的に解くことが一般的である．
-この手法を \keyword{計算流体力学} (Computational Fluid Dynamics; CFD) という．
+この手法を \keyword{数値流体力学} (Computational Fluid Dynamics; CFD) という．
 \cref{def:NSE}で示したように，ナビエ--ストークス方程式は偏微分方程式で記述される．
 微分とは，つまるところ二点間の距離や時間間隔を極限まで小さくしたときの変化率を表すものである．
 従って，空間を細かく区切ることで，この微分を差分で近似することができる．
@@ -443,15 +443,87 @@ GitHub: \qquad & \url{https://github.com/kuma003} (Univ. account) \\
 
 \subsection{ナビエ--ストークス方程式の簡単な導出}
 
-物質微分をもとに，流体要素にかかる力から運動方程式を立ててみよう．
+まず始めに，粘性が作用しない流体 (\keyword{完全流体} (Ideal fluid)) から考えよう．
 
-微小流体要素を，その体積が$\Delta x \Delta y \Delta z$なる微小立方体とする．
-このとき，圧力勾配による力を考えてみよう．
+微小流体要素を，その体積が$\Delta x \Delta y \Delta z = \Delta V$なる微小立方体とする．
+\cref{fig:pressure_differential}を参考に，このとき圧力によって$x$方向にかかる力を考察しよう．
+
+\begin{figure}[h]
+  \centering
+  \includegraphics{aero/img/pressure_differential.pdf}
+  \caption{$x$方向の圧力差.}
+  \label{fig:pressure_differential}
+\end{figure}
+
+図中のように，微小立方体の左右からかかる圧力差が物体の$x$方向にかかる力に相当する．
+ここで，圧力はすべて\cref{fig:pressure_differential}に示すように，すべて立方体に入る向きに作用することに注意しよう．
+このとき，微小立方体の圧力差による力は次のように表される．
+  \begin{equation}
+    F_x = -\left(P(x + \Delta x, y, z) - P(x, y, z)\right) \Delta y \Delta z.
+  \end{equation}
+ここで，$\Delta x$が十分に小さいとき，テーラー展開を用いて
+\begin{equation}
+  \frac{\partial P}{\partial x} \approx \frac{P(x + \Delta x, y, z) - P(x, y, z)}{\Delta x}
+\end{equation}
+と表されることを用いる．すると，
+\begin{equation}
+  F_x = -\frac{\partial P}{\partial x} \Delta x\Delta y \Delta z = -\frac{\partial P}{\partial x} \Delta V
+\end{equation}
+他の方向についても同様に考えると，流体要素にかかる圧力による力は，
+\begin{align*}
+  F_y &= -\frac{\partial P}{\partial y} \Delta V, \\
+  F_z &= -\frac{\partial P}{\partial z} \Delta V.
+\end{align*}
+これらをまとめると，流体要素にかかる圧力による力は，
+\begin{equation}
+  \mathbf{F} = -\nabla P \Delta V.
+\end{equation}
+ここで，$\nabla \coloneqq \left(\frac{\partial }{\partial x}, \frac{\partial }{\partial y}, \frac{\partial }{\partial z}\right)$である．
+
+流体要素の加速度は，先の物質微分から，
+\begin{equation*}
+  \frac{\Diff \mathbf{u}}{\Diff t} = \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u}\cdot \nabla)\mathbf{u}
+\end{equation*}
+であるから，流体要素の運動方程式を立てると，
+\begin{equation*}
+  \rho \Delta V \frac{\Diff \mathbf{u}}{\Diff t} = -\nabla P \Delta V + \mathbf{g} \rho \Delta V
+\end{equation*}
+ここで，$\rho$は流体の密度，$\mathbf{g}$は単位質量あたりに作用する外力項である．
+$\rho \Delta V$で除すると，
+\begin{equation}
+  \frac{\Diff \mathbf{u}}{\Diff t} = \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u}\cdot \nabla)\mathbf{u} = -\frac{1}{\rho} \nabla P + \mathbf{g}
+\end{equation}
+これを，\keyword{オイラーの方程式} (Euler's equations) という．
+
+\begin{definition}{オイラーの方程式}{}{}
+    　\keyword{オイラーの方程式}とは，理想流体 (非粘性流体) の運動を記述する方程式である．
+   \begin{equation}
+     \frac{\Diff \mathbf{u}}{\Diff t} = -\frac{1}{\rho} \nabla P + \mathbf{g}
+   \end{equation}
+\end{definition}
+
+\enskip
+
+次に，粘性の効果を取り入れる．
+そのために，ニュートンの仮定を導入しよう．
+
+\cref{fig:shear}のように，微小流体要素の$x$--$y$平面に着目し，その上下 ($y$軸方向) における$x$方向の速度差に着目しよう．
+\begin{figure}
+  \centering
+  \includegraphics{aero/img/shear.pdf}
+  \caption{$x$--$y$平面における速度差.}
+  \label{fig:shear}
+\end{figure}
+このとき，
 
 
 
-
-
+\begin{definition}{ニュートンの仮定}{}{}
+  ニュートンの仮定とは，流体の運動における粘性の効果を考慮するための仮定である．
+  \begin{equation*}
+    \tau = \mu \left( \frac{\partial u}{\partial y} \right)
+  \end{equation*}
+\end{definition}
 
 
 \subsection{ベルヌーイの定理}
