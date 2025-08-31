@@ -97,6 +97,9 @@
 % ページスタイル
 \pagestyle{fancy}
 \fancyhf{}
+% 「第N章. 章タイトル」形式で左上に表示
+\renewcommand{\chaptermark}[1]{%
+  \markboth{第\thechapter 章. #1}{}}
 \fancyhead[L]{\leftmark}
 \fancyhead[R]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
