@@ -3,6 +3,7 @@
 \usepackage[dvipdfmx]{graphicx,xcolor}
 \usepackage{amsmath, amssymb, amsfonts, latexsym, mathtools}
 \usepackage{amsthm}
+\usepackage{url}
 \usepackage{hyperref}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins, breakable, theorems}
@@ -505,24 +506,50 @@ $\rho \Delta V$で除すると，
 \enskip
 
 次に，粘性の効果を取り入れる．
-そのために，ニュートンの仮定を導入しよう．
+そのために，ニュートンの粘性法則を導入しよう．
 
 \cref{fig:shear}のように，微小流体要素の$x$--$y$平面に着目し，その上下 ($y$軸方向) における$x$方向の速度差に着目しよう．
-\begin{figure}
+\begin{figure}[H]
   \centering
   \includegraphics{aero/img/shear.pdf}
-  \caption{$x$--$y$平面における速度差.}
+  \caption{$x$--$y$平面における速度差 .}
   \label{fig:shear}
 \end{figure}
-このとき，
+このとき，速度差に比例したせん断応力
+\footnote{せん断応力とは，ある面に対して平行に作用する単位面積あたりの力のことである．}
+ (Shear stress) が発生すると考えられる
+\footnote{
+  これは分子運動論から説明ができる．
+  せん断応力とはつまるところ分子の運動量が与える影響であり，相対的に速度が速い側の運動量が遅い側に伝わることで発生するとみることができる．
+  より詳細なボルツマン方程式から流体力学を構成するフレームワークとして，Chapman--Enskog理論がある．
+  % 概要は \url{https://en.wikipedia.org/wiki/Chapman%e2%80%93Enskog_theory} (Accessed on 2025/8/31) を参照されたい．
+}．
+\begin{equation*}
+  F_{xy} \propto \frac{u_x(x, y + \Delta y, z) - u_x(x, y, z)}{\Delta y} \approx \frac{\partial u_x}{\partial y}\qquad
+  \text{i.e.}\quad  F_{xy} = \mu \frac{\partial u_x}{\partial y}
+\end{equation*}
+この比例定数 $\mu$ を \keyword{粘性率} という．
+また，$F_{xy}$というのは，法線方向が$y$軸方向の面について$x$軸方向に作用するせん断応力という意である．
 
+ところで，剛体の要素の位置関係が変わらない運動として，平行移動の他に全体が一様に回転する剛体回転がある．
+そこで，回転する流速場として$\mathbf{u}(x, y, z) = (-\Omega y, \Omega x, 0)$を考えてみよう．
+これは図を書けば明らかなように，全体が一様に回転する流れであり，個々の要素の位置関係は変わらないためせん断応力は$0$になる．
+この速度場を先の式に代入してみると，せん断応力が生じてしまうことが分かる．
+そこで，このような剛体回転においてはせん断応力が生じないように，以下のように修正しよう．
+\begin{equation*}
+  F_{xy} = \mu \left(\frac{\partial u_x}{\partial y} + \frac{\partial u_y}{\partial x}\right)
+\end{equation*}
+これにより，剛体回転においてもせん断応力が$0$になるように修正される．
 
+流体は等方的であることが期待されるから，任意の方向に対して同様の関係が成り立つと考えられる．
 
-\begin{definition}{ニュートンの仮定}{}{}
-  ニュートンの仮定とは，流体の運動における粘性の効果を考慮するための仮定である．
+\begin{definition}{ニュートンの粘性法則}{}{}
+  ニュートンの粘性法則とは，流体のせん断応力がその速度勾配に比例することを示す法則である．
   \begin{equation*}
-    \tau = \mu \left( \frac{\partial u}{\partial y} \right)
+    \tau \propto \left( \frac{\partial u}{\partial y} \right)
   \end{equation*}
+
+
 \end{definition}
 
 
