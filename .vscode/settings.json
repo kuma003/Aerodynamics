@@ -1,7 +1,7 @@
 {
     // Automatically clean up auxiliary files after building
     // Set to "never" to disable, or "onBuilt" / "onSucceeded" for automatic cleanup
-    "latex-workshop.latex.autoClean.run": "onSucceeded",
+    "latex-workshop.latex.autoClean.run": "never",
     "latex-workshop.latex.clean.method": "glob",
 
     // export output files to out directory
