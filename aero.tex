@@ -522,7 +522,7 @@ $\Delta x \ll 1$として
 \begin{definition}{物質微分}{}{}
   　\keyword{物質微分} (Material derivative) とは，ラグランジュの方法に基づいた流体要素からみた時間微分であり，以下のように表される．
     \begin{equation}
-      \frac{\Diff}{\Diff t} \coloneqq \frac{\partial }{\partial t} + \mathbf{u}\cdot \nabla
+      \frac{\Diff}{\Diff t} \coloneqq \frac{\partial }{\partial t} + \mathbf{u}\cdot \nabla \label{eq:material_derivative}
     \end{equation}
 \end{definition}
 
@@ -686,6 +686,145 @@ $\rho \Delta V$で除すると，
 \end{definition}
 
 \subsection{ベルヌーイの定理}
+ナビエ--ストークス方程式は非線形偏微分方程式であるため，解析的に解くことは非常に困難である．
+そこで，さらにいくつかの仮定を置くことで，解析的に解けるようになる場合がある．
+
+ここでは流体は完全流体であり，さらに流れが時間的に変化しない定常流であると仮定しよう．
+この場合，ナビエ--ストークス方程式はオイラーの方程式に戻る．
+また，定常流であるから，$\partial \mathbf{u}/\partial t = 0$である．
+さらに，外力項として重力のみを考慮し，$\mathbf{g} = -g \e_z$と表されるとする．
+このとき，オイラーの方程式は， 
+\begin{equation*}
+  (\mathbf{u}\cdot \nabla)\mathbf{u} = -\frac{1}{\rho} \nabla P - g \e_z
+\end{equation*}
+となる．
+
+ここで，\emph{フレネ--セレの公式} を導入しよう．
+細かい議論は付録に譲るが，フレネ--セレの公式とは，向き付きの曲線の接ベクトル$\e_t$，法線ベクトル$\e_n$，従法線ベクトル$\e_b$に関する以下の関係式である．
+\begin{align*}
+  \frac{\diff }{\diff s}
+  \begin{pmatrix}
+    \e_t \\
+    \e_n \\
+    \e_b
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    0 & \kappa & 0\\
+    -\kappa & 0 & \tau\\
+    0 & -\tau & 0
+  \end{pmatrix}
+  \begin{pmatrix}
+    \e_t \\
+    \e_n \\
+    \e_b
+  \end{pmatrix}
+\end{align*}
+ここで$\diff/\diff s$は曲線上での微分である．
+また，$\kappa, \tau$はそれぞれ曲線の\emph{曲率}，\emph{ねじれ}であって，以下のように定義される:
+\begin{align*}
+  \kappa &\coloneqq \left|\frac{\diff \e_t}{\diff s}\right|,\\
+  \tau &\coloneqq -\frac{\diff \e_b}{\diff s} \cdot \e_n.
+\end{align*}
+これだとわかりにくいが，例えば円を仮定した場合，$\kappa = 1/R, \tau = 0$となる．
+より一般の複雑な曲線でも，その点に接する円を考えれば，その円の半径$R$を用いて$\kappa = 1/R$と表される．
+なお，この仮想的な円の半径を\emph{曲率半径} (Radius of curvature) という．
+
+さて，流線に沿った単位接ベクトルを$\e_s$と表すことにしよう．
+流線はもとよりその接ベクトルが流速ベクトルと一致するから，$\mathbf{u} = u\e_s$と表される．
+したがって，
+\begin{gather*}
+  \mathbf{u}\cdot \nabla = u \e_s \cdot \nabla = u \frac{\partial }{\partial s}
+\end{gather*}
+であるから，オイラーの方程式の左辺は，
+\begin{equation}
+  (\mathbf{u}\cdot \nabla)\mathbf{u} = u \frac{\partial }{\partial s}(u \e_s) = u \frac{\partial u}{\partial s} \e_s + u^2 \frac{\partial \e_s}{\partial s} = u \frac{\partial u}{\partial s} \e_s + \frac{u^2}{R} \e_n
+\end{equation}
+となる．
+
+また，
+\begin{equation}
+  \nabla = \e_s \frac{\partial}{\partial s} + \e_n \frac{\partial}{\partial n} + \e_b \frac{\partial}{\partial b}
+\end{equation}
+であるから，オイラーの式からそれぞれの方向成分を比較すると，
+\begin{equation}
+  \left\{ 
+  \begin{alignedat}{2} 
+    \displaystyle u \frac{\partial u}{\partial s} &= -\frac{1}{\rho} \frac{\partial P}{\partial s} - g \frac{\partial z}{\partial s},\\
+    \displaystyle \frac{u^2}{R} &= -\frac{1}{\rho} \frac{\partial P}{\partial n} - g \frac{\partial z}{\partial n},\\ 
+    \displaystyle 0 &= -\frac{1}{\rho} \frac{\partial P}{\partial b} - g \frac{\partial z}{\partial b}
+  \end{alignedat}
+  \right.
+\end{equation}
+となる．
+
+ここで第一式に着目しよう．
+これを流線上で点$\mathbf{r}_1$から$\mathbf{r}_2$まで積分すると，
+\begin{align*}
+  \int_{\mathbf{r}_1}^{\mathbf{r}_2} u \frac{\partial u}{\partial s} \, \diff s &= -\int_{\mathbf{r}_1}^{\mathbf{r}_2} \frac{1}{\rho} \frac{\partial P}{\partial s} \, \diff s - \int_{\mathbf{r}_1}^{\mathbf{r}_2} g \frac{\partial z}{\partial s} \,\diff s
+\end{align*}
+となる．
+ここで右辺は容易に計算できて，それぞれ，
+\begin{align*}
+  -\int_{\mathbf{r}_1}^{\mathbf{r}_2} \frac{1}{\rho} \frac{\partial P}{\partial s} \, \diff s &= -\frac{1}{\rho}(P_2 - P_1),\\
+  -\int_{\mathbf{r}_1}^{\mathbf{r}_2} g \frac{\partial z}{\partial s} \,\diff s &= -g(z_2 - z_1)
+\end{align*}
+となる．
+また右辺は，
+\begin{align*}
+  \int_{\mathbf{r}_1}^{\mathbf{r}_2} u \frac{\partial u}{\partial s} \, \diff s 
+  = \int_{\mathbf{r}_1}^{\mathbf{r}_2} \frac{\partial}{\partial s}\left(\frac{u^2}{2}\right) \, \diff s
+  = \frac{u_2^2}{2} - \frac{u_1^2}{2}
+\end{align*}
+
+したがって，以上を纏めて整理すれば，
+\begin{equation}
+  \frac{u_1^2}{2} + \frac{P_1}{\rho} + gz_1 = \frac{u_2^2}{2} + \frac{P_2}{\rho} + gz_2
+\end{equation}
+となる．
+勿論，点$\mathbf{r}_1, \mathbf{r}_2$は流線上の任意の点で取れるから，この物理量が保存することが分かる．
+なお，この物理量は単位質量あたりのエネルギーに相当する．
+より分かりやすい圧力の次元に揃えるために密度$\rho$を両辺にかけると，
+\begin{equation}
+  \frac{1}{2}\rho u_1^2 + P_1 + \rho gz_1 = \frac{1}{2}\rho u_2^2 + P_2 + \rho gz_2 
+  \label{eq:bernoulli_equation}
+\end{equation}
+となる．
+
+
+% この式を流線上の点$\mathbf{r}_1$から$\mathbf{r}_2$まで積分してみよう．
+% \begin{align*}
+%   \int_{\mathbf{r}_1}^{\mathbf{r}_2} (\mathbf{u}\cdot \nabla)\mathbf{u} \, \diff s &= -\int_{\mathbf{r}_1}^{\mathbf{r}_2} \frac{1}{\rho} \nabla P \, \diff s - \int_{\mathbf{r}_1}^{\mathbf{r}_2} g \e_z \,\diff s
+% \end{align*}
+% ここで，左辺はベクトルの恒等式
+% \begin{equation*}
+%   (\mathbf{u}\cdot \nabla)\mathbf{u} = \nabla\left(\frac{|\mathbf{u}|^2}{2}\right) - \mathbf{u} \times (\nabla \times \mathbf{u})
+% \end{equation*}
+% を用いれば，$\nabla \times \mathbf{u} = 0$ (渦度が0) である場合に，
+% \begin{equation*}
+%   \int_{\mathbf{r}_1}^{\mathbf{r}_2} (\mathbf{u}\cdot \nabla)\mathbf{u} \, \diff s = \int_{\mathbf{r}_1}^{\mathbf{r}_2} \nabla\left(\frac{|\mathbf{u}|^2}{2}\right) \, \diff s = \frac{|\mathbf{u}_2|^2}{2} - \frac{|\mathbf{u}_1|^2}{2}
+% \end{equation*}
+% となる．
+
+% また右辺は容易に計算できて，，それぞれ，
+% \begin{align*}
+%   -\int_{\mathbf{r}_1}^{\mathbf{r}_2} \frac{1}{\rho} \nabla P \, \diff s &= -\frac{1}{\rho}(P_2 - P_1),\\
+%   -\int_{\mathbf{r}_1}^{\mathbf{r}_2} g \e_z \,\diff s &= -g(z_2 - z_1)
+% \end{align*}
+% となる．したがって，まとめると，
+% \begin{equation*}
+%   \frac{|\mathbf{u}_2|^2}{2} + \frac{P_2}{\rho} + gz_2 = \frac{|\mathbf{u}_1|^2}{2} + \frac{P_1}{\rho} + gz_1
+% \end{equation*}
+% となる．
+% 勿論$P_1, P_2$は流線上の任意の点で取れるから，この物理量が保存することが分かる．
+% より分かりやすい単位に揃えるために，両辺に$\rho$をかけると，
+% \begin{equation}
+%   \frac{\rho |\mathbf{u}_1|^2}{2} + P_1 + \rho gz_1 = \frac{\rho |\mathbf{u}_2|^2}{2} + P_2 + \rho gz_2 
+%   \label{eq:bernoulli_equation} 
+% \end{equation}
+% となる．
+% これが，\emph{ベルヌーイの定理}である．
+
 
 
 \subsection{境界方程式とレイノルズ数}
