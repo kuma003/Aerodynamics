@@ -3,7 +3,6 @@
 \usepackage[dvipdfmx]{graphicx,xcolor}
 \usepackage{amsmath, amssymb, amsfonts, latexsym, mathtools}
 \usepackage{amsthm}
-\usepackage{url}
 \usepackage{hyperref}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins, breakable, theorems}
@@ -20,7 +19,7 @@
 \usepackage{here}
 \usepackage[hang,small,bf]{caption}
 \usepackage[subrefformat=parens]{subcaption}
-
+  
 % 色の定義
 \definecolor{mainblue}{RGB}{0,102,204}
 \definecolor{lightblue}{RGB}{230,240,255}
@@ -196,12 +195,11 @@ GitHub: \qquad & \url{https://github.com/kuma003} (Univ. account) \\
 以下にその方程式を示す．
 \begin{definition}{ナビエ--ストークス方程式}{NSE}{}
   ナビエ--ストークス方程式とは，流体の運動を記述するための偏微分方程式である．
-  これらの方程式は，質量保存則，運動量保存則，エネルギー保存則を基に導かれる．
+  非圧縮性流体の場合，以下のように表される．
     \begin{equation}
     \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u} \cdot \nabla) \mathbf{u} = -\frac{1}{\rho} \nabla p + \nu \nabla^{2} \mathbf{u} + \mathbf{g}
     \end{equation}
-  ただし，$\mathbf{u}$は流体の速度ベクトル，$p$は圧力，$\rho$は流体の密度，$\nu$は動粘性係数，$\mathbf{g}$は外力項である．
-
+  ただし，$\mathbf{u}, p, \rho, \nu, \mathbf{g}$はそれぞれ流体の速度ベクトル，圧力，流体の密度，動粘度，単位体積あたりにはたらく外力項である．
 \end{definition}
 詳細についてここでは踏み入らないが，非線形であるため解析的に解くことは困難であり，数値的に (すなわちコンピュータを用いて) 解くことが一般的である．
 
@@ -377,8 +375,91 @@ GitHub: \qquad & \url{https://github.com/kuma003} (Univ. account) \\
 歴史的な順番からはベルヌーイの定理を先に説明するべきかもしれないが，ここでは理論に重きを置くため，ナビエ--ストークス方程式を先に説明することに注意されたい．
 
 \section{ナビエ--ストークス方程式}
+\subsection{流れの連続性}
+まず，流れの連続性について考えてみよう．
+流れの連続性とはそのままの意であり，流体が途中で消えたり突然現れたりしないことを意味し，質量の保存則に基づくものである．
+
+\enskip
+
+もう少し数学的に議論しよう．
+\cref{fig:continuity_equation}に示すような，各辺の長さが$\Delta x, \Delta y, \Delta z$である微小直方体を考える．
+\begin{figure}[H]
+  \centering
+  \includegraphics{aero/img/continuity_equation.pdf}
+  \caption{微小立方体と流入・流出する流れ．}
+  \label{fig:continuity_equation}
+\end{figure}
+
+ここで，この微小直方体へ時間$\Delta t$間で流入・流出する質量を考えよう．
+$x$方向について考えれば，\cref{fig:continuity_equation} 中の左側から$u_x(x,y,z,t)$という速度で流入し，右側から$u_x(x+\Delta x,y,z,t)$という速度で流出する．
+流体の密度を$\rho$とすれば，時間$\Delta t$間で流入・流出する質量はそれぞれ，
+\begin{align*}
+  \text{(流入する質量)} &= \rho u_x(x,y,z,t) \Delta y \Delta z \Delta t,\\
+  \text{(流出する質量)} &= \rho u_x(x+\Delta x,y,z,t) \Delta y \Delta z \Delta t.
+\end{align*}
+従って，総和として流出する正味の質量を計算すると，
+\begin{align*}
+  \text{($x$方向の流出質量)} &= \rho \left[u_x(x+\Delta x,y,z,t) - u_x(x,y,z,t)\right] \Delta y \Delta z \Delta t \\
+  &= \rho \frac{\partial u_x}{\partial x} \Delta x \Delta y \Delta z \Delta t\\
+  &= \rho \frac{\partial u_x}{\partial x} \Delta V \Delta t
+\end{align*}
+ここで，$\Delta V = \Delta x \Delta y \Delta z$あり，
+$\Delta x \ll 1$として
+\begin{equation*}
+  \frac{u_x(x+\Delta x,y,z,t) - u_x(x,y,z,t)}{\Delta x} \approx \frac{\partial u_x}{\partial x}
+\end{equation*}
+となることを用いている．
+
+同様に考えれば$y$方向，$z$方向についてもそれぞれ流出質量が求められるから，この微小直方体全体の正味の流出量は，
+\begin{equation}
+  \text{(正味の流出質量)} = \rho \left(\frac{\partial u_x}{\partial x} + \frac{\partial u_y}{\partial y} + \frac{\partial u_z}{\partial z}\right) \Delta V \Delta t = \rho (\nabla \cdot \mathbf{u}) \Delta V \Delta t
+\end{equation}
+となる．
+密度変化がなければ，連続性から正味の流出質量は0でなければならないから，
+\begin{equation}
+  \frac{\partial u_x}{\partial x} + \frac{\partial u_y}{\partial y} + \frac{\partial u_z}{\partial z} = \nabla \cdot \mathbf{u} = 0
+  \label{eq:incompressible_continuity}
+\end{equation}
+が\keyword{連続の式}である．
+
+一方で，密度変化がある場合には，出ていかなかった分 (つまり正味の流入量) が密度の変化に寄与する．
+すなわち，
+\begin{equation*}
+  \text{(密度変化)} = 
+  \left(\rho(x, y, z, t + \Delta t) - \rho(x, y, z, t)\right)\Delta V = -\rho (\nabla \cdot \mathbf{u}) \Delta V \Delta t = \text{(正味の流入質量)}
+\end{equation*}
+となる．つまり整理すると，
+\begin{equation}
+  \frac{\partial \rho}{\partial t} + \rho (\nabla \cdot \mathbf{u}) = 0
+  \label{eq:compressible_continuity}
+\end{equation}
+これが，圧縮性流体における\emph{連続の式}である．
+
+なお，圧縮性流体は新たに$\rho$が未知変数として加わり計算がより煩雑になるため，往々にして解析的に解くことは非常に困難である．
+そこで，以降において特に断りのない場合は非圧縮性流体を仮定する．
+
+
+% \begin{definition}{流量}{Flow rate}{}{}
+%   　\keyword{流量} (Flow rate) とは，流体が単位時間当たりに通過する量を表す物理量である．
+%   ここで用いる量には2種類あり，質量を基準にする\keyword{質量流量} (Mass flow rate) と，体積を基準にする\keyword{体積流量} (Volumetric flow rate) がある．
+%   質量流量は以下のように定義される: 
+%   \begin{equation}
+%     \dot{m} = \frac{\diff (\rho v)}{\diff t}
+%   \end{equation}
+%   ここで$v$は流速，$\rho$は密度である．
+%   一方で，体積流量は以下のように定義される:
+%   \begin{equation}
+%     Q = \frac{\diff v}{\diff t}
+%   \end{equation}
+%   これらの関係は以下のようになる:
+%   \begin{equation}
+%     \dot{m} = \rho Q
+%   \end{equation}  
+% \end{definition}
+
+
 \subsection{ガウスの方法とラグランジュの方法}
-本題に入る前に，流体力学における二つの主要な見方である，オイラーの方法とラグランジュの方法について説明する．
+本題に入る前に，流体力学における二つの主要な見方である，オイラーの方法とラグランジュの方法について説明しよう．
 
 \begin{definition}{オイラーの方法}{}{}
   　\keyword{オイラーの方法}とは，空間のある固定された一点に注目し，その点を流体が通過していく様子を観察する方法である．
@@ -441,13 +522,13 @@ GitHub: \qquad & \url{https://github.com/kuma003} (Univ. account) \\
 \begin{definition}{物質微分}{}{}
   　\keyword{物質微分} (Material derivative) とは，ラグランジュの方法に基づいた流体要素からみた時間微分であり，以下のように表される．
     \begin{equation}
-      \frac{\Diff}{\Diff t} = \frac{\partial }{\partial t} + \mathbf{u}\cdot \nabla
+      \frac{\Diff}{\Diff t} \coloneqq \frac{\partial }{\partial t} + \mathbf{u}\cdot \nabla
     \end{equation}
 \end{definition}
 
 \subsection{ナビエ--ストークス方程式の簡単な導出}
 
-まず始めに，粘性が作用しない流体 (\keyword{完全流体} (Ideal fluid)) から考えよう．
+それでは初めに，粘性が作用しない流体 (\keyword{完全流体} (Ideal fluid)) から考えよう．
 
 微小流体要素を，その体積が$\Delta x \Delta y \Delta z = \Delta V$なる微小立方体とする．
 \cref{fig:pressure_differential}を参考に，このとき圧力によって$x$方向にかかる力を考察しよう．
@@ -489,9 +570,10 @@ GitHub: \qquad & \url{https://github.com/kuma003} (Univ. account) \\
   \frac{\Diff \mathbf{u}}{\Diff t} = \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u}\cdot \nabla)\mathbf{u}
 \end{equation*}
 であるから，流体要素の運動方程式を立てると，
-\begin{equation*}
+\begin{equation}
   \rho \Delta V \frac{\Diff \mathbf{u}}{\Diff t} = -\nabla P \Delta V + \mathbf{g} \rho \Delta V
-\end{equation*}
+  \label{eq:euler_intermediate}
+\end{equation}
 ここで，$\rho$は流体の密度，$\mathbf{g}$は単位質量あたりに作用する外力項である．
 $\rho \Delta V$で除すると，
 \begin{equation}
@@ -525,7 +607,7 @@ $\rho \Delta V$で除すると，
   これは分子運動論から説明ができる．
   せん断応力とはつまるところ分子の運動量が与える影響であり，相対的に速度が速い側の運動量が遅い側に伝わることで発生するとみることができる．
   より詳細なボルツマン方程式から流体力学を構成するフレームワークとして，Chapman--Enskog理論がある．
-  % 概要は \url{https://en.wikipedia.org/wiki/Chapman%e2%80%93Enskog_theory} (Accessed on 2025/8/31) を参照されたい．
+  概要は \href{https://en.wikipedia.org/wiki/Chapman\%e2\%80\%93Enskog_theory}{Wikipedia: Chapman--Enskog theory} (Accessed on 2025-08-31) を参照されたい．
 }．
 \begin{equation*}
   F_{xy} \propto \frac{u_x(x, y + \Delta y, z) - u_x(x, y, z)}{\Delta y} \approx \frac{\partial u_x}{\partial y}\qquad
@@ -542,21 +624,69 @@ $\rho \Delta V$で除すると，
 \begin{equation*}
   F_{xy} = \mu \left(\frac{\partial u_x}{\partial y} + \frac{\partial u_y}{\partial x}\right)
 \end{equation*}
-これにより，剛体回転においてもせん断応力が$0$になるように修正される．
+これにより，剛体回転においてはせん断応力が$0$になるように修正される．
 
 流体は等方的であることが期待されるから，任意の方向に対して同様の関係が成り立つと考えられる．
+つまり，以下のような形で表される
+\footnote{このような添え字複数を持つ値をテンソルという．}
+．
+\begin{equation*}
+  F_{ij} = \mu\left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right)
+\end{equation*}
+ここで，添え字$i, j$はそれぞれ$x, y, z$にのいずれかに対応する．
+
 
 \begin{definition}{ニュートンの粘性法則}{}{}
   ニュートンの粘性法則とは，流体のせん断応力がその速度勾配に比例することを示す法則である．
-  \begin{equation*}
-    \tau \propto \left( \frac{\partial u}{\partial y} \right)
-  \end{equation*}
-
-
+  \begin{equation}
+    F_{ij} = \mu\left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right)
+  \end{equation}
 \end{definition}
 
+\enskip
+
+さて，ニュートンの粘性法則を用いて流体要素に作用する粘性力を考えよう．
+例えば$x$方向にかかる力を考えると，法線方向の違いから符号が変わることに注意して，
+\begin{align*}
+  F_x &= F_{xx}(x + \Delta x, y, z) \Delta y \Delta z - F_{xx}(x, y, z) \Delta y \Delta z \\
+  &\qquad + F_{yx}(x, y + \Delta y, z) \Delta x \Delta z - F_{yx}(x, y, z) \Delta x \Delta z \\
+  &\qquad\qquad + F_{zx}(x, y, z + \Delta z) \Delta x \Delta y - F_{zx}(x, y, z) \Delta x \Delta y\\
+  &= \left(\frac{\partial F_{xx}}{\partial x} + \frac{\partial F_{yx}}{\partial y} + \frac{\partial F_{zx}}{\partial z}\right) \Delta V\\
+  &= \left[\left(\frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2}\right) u_x + \frac{\partial}{\partial x}\left(\frac{\partial u_x}{\partial x} + \frac{\partial u_y}{\partial y} + \frac{\partial u_z}{\partial z}\right)\right]\Delta V\\
+  &= \left(\nabla^2 u_x + \frac{\partial}{\partial x}(\nabla \cdot \mathbf{u})\right)\Delta V
+\end{align*}
+のようになる．
+等方性から他の成分についても同様であると考えられるから，
+\begin{equation*}
+  \text{粘性力} = \left(\nabla^2 \mathbf{u} + \nabla(\nabla \cdot \mathbf{u})\right)\Delta V
+\end{equation*}
+
+先にも触れたように，この流体が密度が一定の非圧縮性流体だと仮定しよう．
+このとき，\cref{eq:incompressible_continuity}より，$\nabla \cdot \mathbf{u} = 0$であるから，この微小領域にかかる粘性力は，
+\begin{equation*}
+  \text{粘性力} = \mu \nabla^2 \mathbf{u} \Delta V
+\end{equation*}
+となる．
+
+\cref{eq:euler_intermediate}と同様に流体要素の運動方程式をたて，$\rho \Delta V$で除すると，
+\begin{equation}
+  \frac{\Diff \mathbf{u}}{\Diff t} = -\frac{1}{\rho} \nabla P + \nu \nabla^2 \mathbf{u} + \mathbf{g}
+  \label{eq:NSE_incompressible}
+\end{equation}
+ここで，$\nu \coloneqq \mu/\rho$は\keyword{動粘度} (Kinematic viscosity) である．
+これが，非圧縮性流体における\emph{ナビエ--ストークス方程式}である．
+
+\begin{definition}{ナビエ--ストークス方程式}{}{}
+  　\keyword{ナビエ--ストークス方程式} (Navier--Stokes equations) とは，流体の運動を記述する方程式である．
+  非圧縮性流体においては，以下のように表される．
+  \begin{equation}
+    \frac{\Diff \mathbf{u}}{\Diff t} = -\frac{1}{\rho} \nabla P + \nu \nabla^2 \mathbf{u} + \mathbf{g}
+  \end{equation}
+  ここで，$\nu$は動粘度であって，$\nu = \mu/\rho$．
+\end{definition}
 
 \subsection{ベルヌーイの定理}
+
 
 \subsection{境界方程式とレイノルズ数}
 
@@ -597,6 +727,9 @@ $\rho \Delta V$で除すると，
 \section{クォータニオン}
 
 \chapter{材料力学の基礎}
+\section{応力とひずみ}
+
+\section{曲げ応力}
 
 \chapter{自作エンジンの基礎}
 \section{ハイブリッドエンジンの燃焼理論}
