@@ -3,6 +3,8 @@
 \usepackage[dvipdfmx]{graphicx,xcolor}
 \usepackage{amsmath, amssymb, amsfonts, latexsym, mathtools}
 \usepackage{amsthm}
+\usepackage{mhchem}
+\usepackage{siunitx}
 \usepackage{hyperref}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins, breakable, theorems}
@@ -924,13 +926,120 @@ $\rho \Delta V$で除すると，
 \section{曲げ応力}
 
 \chapter{自作エンジンの基礎}
+
+この章では，自作エンジン (ハイブリッドエンジン) の基礎について説明する．
+細かい理論までには立ち入らず，あくまでも空力班として知っておくべき基礎的な事項に留めるため，適宜各自で補ってほしい．
+\nocite{rocketPropulsionElements}
 \section{ハイブリッドエンジンの燃焼理論}
+\subsection{ハイブリッドエンジンの構成}
+ハイブリッドエンジンとは，その名の通り固相の燃料と液相 (もしくは気相) の酸化剤を組み合わせたロケットエンジンである．
+\begin{figure}
+  \centering
+  \includegraphics{aero/img/engine_structure1.pdf .pdf}
+  \caption{ハイブリッドエンジンの構成.}
+  \label{fig:hybrid_engine}
+\end{figure}
+その構成は非常にシンプルであり，上流部 (タンク側) から順に列挙すると主に以下の構成要素からなる．
+\begin{enumerate}
+  \item タンク (酸化剤)
+  \item インジェクタ・オリフィス
+  \item 燃焼室
+  \item グレイン (燃料) \footnotemark
+  \item アブレータ
+  \item ノズル
+\end{enumerate}
+\footnotetext{HyperTEKにおいては，燃焼室とグレインは一体化している．}
+
+順に役割を説明しよう．
+
+タンクは酸化剤を貯蔵する容器である．
+F.T.E.において用いるのは専ら亜酸化窒素 (\ce{N_2 O}) である．
+亜酸化窒素は熱によって分解して酸素を放出するため，酸化剤として機能することができる．
+亜酸化窒素が液体で充填されるために，この中の圧力は数\unit{\mega\pascal}オーダーとなる．
+
+インジェクタはタンクと燃焼室を繋ぐ部品であり，
+内部に取り付けられたオリフィスによって酸化剤の流量を調整し，燃焼室へ酸化剤を噴霧する．
+オリフィスの形状によって流量が変化するため，燃焼の勢いを調整するのに重要な役割を果たす．
+
+燃焼室は内側から順にグレイン，アブレータ，エンジン筐体からなり，燃焼を行われる空間である．
+F.T.E.においてはグレインにはPMMAをアブレータにはガラス強化繊維 (GFRP) を用いている．
+グレインは燃焼終了後でもある程度残るように設計されているが，燃焼による熱が直接エンジン筐体に伝わらないように，その外側にアブレータが配置されている．
+
+ノズルは燃焼室からの高温高圧の燃焼ガスを膨張させて噴出する部品であり，エンジンの推力を生み出す重要な役割を果たす．
+ノズルは途中ですぼまるように設計されており，この部分で流速が速まることで流速が加速され，高速で燃焼ガスが噴出される．
+このときの高温に耐えられるように，ノズルはグラファイト (黒鉛) で作られている．
+
+\subsection{推力}
+推力とはつまるところエンジンの燃焼によって単位時間あたりに排出される運動量に他ならない．
+また，推力を燃焼時間にわたって積分することで，エンジンが生み出す総運動量 (\keyword{トータルインパルス}) を求めることができる．
+\begin{equation}
+  I_{t} = \int_0^{t_f} F \, \diff t
+\end{equation}
+
+一方で酸化剤の質量流量 (単位時間あたりに排出される質量) に対する推力の割合を\keyword{比推力} (Specific impulse) という．
+イメージとしては，車における燃費のようなものである．
+\begin{equation}
+  I_{s} = \frac{\int_0^{t_f} F \, \diff t}{ g_0 \int_0^{t_f} \dot{m} \, \diff t}
+\end{equation}
+ここで$g_0$は重力加速度．
+これは，トータルインパルス$I_{t}$と有効燃料質量$m_f = \int_0^{t_f} \dot{m} \, \diff t$を用いれば，以下のように表される:
+\begin{equation}
+  I_{s} = \frac{I_{t}}{g_0 m_f}.
+\end{equation}
+もしくは，時々刻々の値として瞬間瞬間の平均を考えれば，
+\begin{equation}
+  I_{s} = \frac{F}{g_0 \dot{m}}
+\end{equation}
+となる．
+
+\enskip
+
+もう少し具体的な議論に移ろう．
+
+エンジンから排気されるガスの速度 (ノズル出口における速度) を$v_2$とする．
+ここでは，排気ガスの速度は一定であり，ノズル出口において速度は一様かつ機軸方向にのみ向いていると仮定すると，
+理想的な推力は次式で表される:
+\begin{equation}
+  F = \frac{\diff (mv_2)}{\diff t} = \dot{m} v_2
+\end{equation}
+
+ただし，これが成り立つのは，ノズル出口における圧力$P_2$が外部圧力$P_3$と等しい場合である．
+等しくない場合，ノズル断面積$A_2$に対して，圧力差に起因する力が働くため，これを考慮する必要があり，
+\begin{equation}
+  F = \dot{m} v_2 + (P_2 - P_3) A_2
+\end{equation}
+となる．
+もっとも，一般的には出口圧を大気と同じようにする場合が多く，このような場合を\emph{適正膨張}という．
+一方で，ノズル出口圧が外部圧力よりも高い場合を\emph{過膨張}，低い場合を\emph{不足膨張}という．
+
+ところで，単位を揃えるために，以下のような\emph{有効排気速度}を導入しよう．
+\begin{equation}
+  c \coloneqq v_2 + \frac{(P_2 - P_3) A_2}{\dot{m}}
+\end{equation}
+これにより，推力を以下のように表すことができる．
+\begin{equation}
+  F = \dot{m} c.
+\end{equation}
+また，これより，
+\begin{equation}
+  I_s = \frac{c}{g_0}
+\end{equation}
+となる．
+
+一方で，これと関連して\keyword{特性排気速度} (Characteristic exhaust velocity) $c^*$を導入することがある．
+定義は以下の通りである．
+\begin{equation}
+  c^* \coloneqq \frac{P_1 A_t}{\dot{m}}
+\end{equation}
+
+
+
 \section{流量係数}
 \section{ノズル理論}
 
 % this is a pull request test text
 
-\bibliography{bib/ref}
+\bibliography{aero/bib/ref}
 \bibliographystyle{junsrt}
 
 \end{document}
