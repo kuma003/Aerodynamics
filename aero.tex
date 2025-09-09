@@ -435,10 +435,17 @@ $\Delta x \ll 1$として
   \frac{\partial \rho}{\partial t} + \rho (\nabla \cdot \mathbf{u}) = 0
   \label{eq:compressible_continuity}
 \end{equation}
-これが，圧縮性流体における\emph{連続の式}である．
+これが，密度変化を考慮した場合の\emph{連続の式}である．
 
-なお，圧縮性流体は新たに$\rho$が未知変数として加わり計算がより煩雑になるため，往々にして解析的に解くことは非常に困難である．
-そこで，以降において特に断りのない場合は非圧縮性流体を仮定する．
+なお，補足として，各点で密度変化がある流体を\keyword{圧縮性流体} (Compressible fluid) といい，密度変化が無視できる流体を\keyword{非圧縮性流体} (Incompressible fluid) という．
+
+圧縮性流体は新たに$\rho$が未知変数として加わり計算がより煩雑になるため，往々にして解析的に解くことは非常に困難である．
+そこで，以降において特に断りのない場合は非圧縮性流体を仮定する
+\footnote{
+  その他にも，流体の密度が圧力のみの関数である場合を\emph{バロトロピー流体} (Barotropic fluid) といい，この場合も解析が容易になる．
+  もちろん，密度が定数関数となる非圧縮性流体もバロトロピー流体の一種である．
+  その他に熱力学的に平衡状態にある気体は状態方程式に従うので，この場合もバロトロピー流体となる．
+}．
 
 
 % \begin{definition}{流量}{Flow rate}{}{}
@@ -643,6 +650,8 @@ $\rho \Delta V$で除すると，
   \begin{equation}
     F_{ij} = \mu\left(\frac{\partial u_i}{\partial x_j} + \frac{\partial u_j}{\partial x_i}\right)
   \end{equation}
+  このような法則にしたがう流体を\keyword{ニュートン流体} (Newtonian fluid) という．
+  水など一般的な多くの物質はニュートン流体である．
 \end{definition}
 
 \enskip
@@ -935,7 +944,7 @@ $\rho \Delta V$で除すると，
 ハイブリッドエンジンとは，その名の通り固相の燃料と液相 (もしくは気相) の酸化剤を組み合わせたロケットエンジンである．
 \begin{figure}
   \centering
-  \includegraphics{aero/img/engine_structure1.pdf .pdf}
+  \includegraphics{aero/img/engine_structure1.pdf}
   \caption{ハイブリッドエンジンの構成.}
   \label{fig:hybrid_engine}
 \end{figure}
