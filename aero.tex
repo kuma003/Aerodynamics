@@ -1,4 +1,7 @@
 \documentclass[uplatex,dvipdfmx,a4j,11pt]{jsreport}
+
+\usepackage{otf}
+\usepackage{newtxtext}
 \usepackage[utf8]{inputenc}
 \usepackage[dvipdfmx]{graphicx,xcolor}
 \usepackage{amsmath, amssymb, amsfonts, latexsym, mathtools}
@@ -21,6 +24,8 @@
 \usepackage{here}
 \usepackage[hang,small,bf]{caption}
 \usepackage[subrefformat=parens]{subcaption}
+\usepackage[explicit]{titlesec}
+\usepackage{etoolbox}
   
 % 色の定義
 \definecolor{mainblue}{RGB}{0,102,204}
@@ -93,7 +98,7 @@
 \newcommand{\diff}{\mathrm{d}} % 微分
 \newcommand{\Diff}{\mathrm{D}} % 微分
 
-\def\thefootnote{\fnsymbol{footnote}}
+\def\thefootnote{\fnsymbol{footnote}} %脚注の記号を変える
 
 % ページスタイル
 \pagestyle{fancy}
@@ -119,6 +124,67 @@
 \crefname{table}{表}{表}
 \crefname{chapter}{章}{章}
 \crefname{section}{節}{節}
+\crefname{appendix}{付録}{付録}
+
+% 見出し横画像の高さ（調整用）
+\newcommand{\chapterartheight}{7.5em}
+
+% 章番号に応じて (番号).pdf / .png / .jpg を探して挿入
+\newcommand{\chapterart}{%
+  \begingroup
+  \edef\chapfilepdf{aero/img/\thechapter.pdf}%
+  \edef\chapfilepng{aero/img/\thechapter.png}%
+  \edef\chapfilejpg{aero/img/\thechapter.jpg}%
+  \IfFileExists{\chapfilepdf}{%
+    \includegraphics[height=\chapterartheight,keepaspectratio, trim=0 0 0 0, clip]{\chapfilepdf}%
+  }{%
+    \IfFileExists{\chapfilepng}{%
+      \includegraphics[height=\chapterartheight,keepaspectratio, trim=0 0 0 0, clip]{\chapfilepng}%
+    }{%
+      \IfFileExists{\chapfilejpg}{%
+        \includegraphics[height=\chapterartheight,keepaspectratio, trim=0 0 0 0, clip]{\chapfilejpg}%
+      }{}%
+    }%
+  }%
+  \endgroup
+}
+
+% 章題のスタイル変更
+\titleformat{\chapter}[block] 
+  {\normalfont\sffamily}{}{0pt} {
+    \parbox[b]{\textwidth}{
+      {\fontsize{4em}{48pt}\selectfont 第 {\thechapter} 章.} \quad {\Huge #1}
+      \hfill \chapterart\\[-10pt]
+      \rule{\textwidth}{1pt}
+    }
+}
+
+\titleformat{name=\chapter,numberless}[block] % 章番号がない場合 (目次, 付録, etc.)
+  {\sffamily}{}{0pt} {
+    \parbox[b]{\textwidth}{
+      {\Huge #1}\\[-10pt]
+    \rule{\textwidth}{1pt}
+  }
+}
+
+% 付録用にスタイルを変更する
+\renewcommand{\appendix}{
+  \par
+  \setcounter{chapter}{0}
+  \crefalias{chapter}{appendix} % 章番号をappendixとして参照できるように変更
+  \renewcommand{\chaptermark}[1]{
+    \markboth{付録 {\thechapter}. ##1}{}}
+  \renewcommand{\thechapter}{\Alph{chapter}}
+  \titleformat{\chapter}[block] 
+    {\normalfont\sffamily}{}{0pt} {
+      \parbox[b]{\textwidth}{
+        {\fontsize{4em}{48pt}\selectfont 付録 {\thechapter}.} \quad {\Huge ##1}\\[-10pt]
+        \rule{\textwidth}{1pt}
+      }
+  }
+}
+
+\titlespacing{\chapter}{0pt}{0pt}{0pt}
 
 \begin{document}
 
@@ -375,6 +441,8 @@ GitHub: \qquad & \url{https://github.com/kuma003} (Univ. account) \\
 このセクションでは，流体力学の基礎についてナビエストークス方程式をまず初めに導出し，
 その後ベルヌーイの定理やポテンシャル流について説明する．
 歴史的な順番からはベルヌーイの定理を先に説明するべきかもしれないが，ここでは理論に重きを置くため，ナビエ--ストークス方程式を先に説明することに注意されたい．
+
+\enskip
 
 \section{ナビエ--ストークス方程式}
 \subsection{流れの連続性}
@@ -711,7 +779,7 @@ $\rho \Delta V$で除すると，
 となる．
 
 ここで，\emph{フレネ--セレの公式} を導入しよう．
-細かい議論は付録に譲るが，フレネ--セレの公式とは，向き付きの曲線の接ベクトル$\e_t$，法線ベクトル$\e_n$，従法線ベクトル$\e_b$に関する以下の関係式である．
+細かい議論は\cref{appendix:math}に譲るが，フレネ--セレの公式とは，向き付きの曲線の接ベクトル$\e_t$，法線ベクトル$\e_n$，従法線ベクトル$\e_b$に関する以下の関係式である．
 \begin{align*}
   \frac{\diff }{\diff s}
   \begin{pmatrix}
@@ -924,7 +992,7 @@ $\rho \Delta V$で除すると，
 
 \appendix
 
-\chapter{数学的補足}
+\chapter{数学的補足} \label{appendix:math}
 \section{フレネ--セレの公式}
 
 \section{クォータニオン}
