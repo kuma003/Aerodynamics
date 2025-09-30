@@ -1,0 +1,75 @@
+```{R}
+# 必要パッケージの読み込み
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(stringr)
+
+# ファイルパス
+file_path <- "/data/data.xlsx"
+
+# シート名ペアと英語ラベル
+sheet_pairs <- list(
+  list(present = "粗さ有",     absent = "粗さ無",     label_present = "Roughness_Present",                    label_absent = "Roughness_Absent"),
+  list(present = "インフレーション薄_粗さ有ver.", absent = "インフレーション薄_粗さ無ver.", label_present = "InflationThinRoughness_Present_v1", label_absent = "InflationThinRoughness_Absent_v1"),
+  list(present = "インフレーション薄_粗さ有ver2", absent = "インフレーション薄_粗さ無ver2", label_present = "InflationThinRoughness_Present_v2", label_absent = "InflationThinRoughness_Absent_v2")
+)
+
+# 比較するドラグ種別
+drag_types <- c("Pressure", "Viscous", "Total")
+
+# 各ペア・各ドラグ種別でプロットと保存
+for(pair in sheet_pairs) {
+  for(drag in drag_types) {
+    # “Present” シートを読み込む
+    df_has <- read_excel(file_path, sheet = pair$present, col_names = FALSE)
+    row_drag_has <- which(df_has[[1]] == drag)
+    header_has <- df_has[row_drag_has + 1, -1] %>% unlist() %>% as.character()
+    parts <- header_has[!is.na(header_has)]
+    coeff_rows_has <- which(grepl("軸力係数", df_has[[1]]))
+    row_coeff_has <- coeff_rows_has[coeff_rows_has > row_drag_has][1]
+    coeff_has <- df_has[row_coeff_has, 2:(1 + length(parts))] %>% unlist() %>% as.numeric()
+    
+    # “Absent” シートを読み込む
+    df_no <- read_excel(file_path, sheet = pair$absent, col_names = FALSE)
+    row_drag_no <- which(df_no[[1]] == drag)
+    coeff_rows_no <- which(grepl("軸力係数", df_no[[1]]))
+    row_coeff_no <- coeff_rows_no[coeff_rows_no > row_drag_no][1]
+    coeff_no <- df_no[row_coeff_no, 2:(1 + length(parts))] %>% unlist() %>% as.numeric()
+    
+    # プロット用データフレーム作成
+    df_plot <- data.frame(
+      Part        = factor(rep(parts, 2), levels = parts),
+      Coefficient = c(coeff_has, coeff_no),
+      Group       = factor(rep(c(pair$label_present, pair$label_absent), each = length(parts)))
+    )
+    
+    # グラフ生成
+    p <- ggplot(df_plot, aes(x = Part, y = Coefficient, fill = Group)) +
+      geom_col(position = position_dodge(width = 0.7), width = 0.6) +
+      labs(
+        title = paste0(drag, " Drag Coefficient\n", pair$label_present, " vs ", pair$label_absent),
+        x     = NULL,
+        y     = "Drag Coefficient"
+      ) +
+      theme_minimal() +
+      theme(
+        plot.title   = element_text(hjust = 0.5),
+        axis.text.x  = element_text(angle = 0, vjust = 0.5),
+        legend.title = element_blank()
+      )
+    
+    # 表示
+    print(p)
+    
+    # ファイル名用にスペースや特殊文字を置き換え
+    base_name <- str_replace_all(paste(drag, pair$label_present, "vs", pair$label_absent), "\\s+", "_")
+    base_name <- str_replace_all(base_name, "[^A-Za-z0-9_]", "")
+    
+    # PDF と PNG で保存
+    ggsave(filename = paste0(base_name, ".pdf"), plot = p, width = 8, height = 6)
+    ggsave(filename = paste0(base_name, ".png"), plot = p, width = 8, height = 6, dpi = 300)
+  }
+}
+```
