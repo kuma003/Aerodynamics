@@ -125,6 +125,9 @@
 \crefname{chapter}{章}{章}
 \crefname{section}{節}{節}
 \crefname{appendix}{付録}{付録}
+\newcommand{\crefpairconjunction}{と} % 2つの参照をつなぐとき
+\newcommand{\crefrangeconjunction}{から} % 範囲を示すとき
+\newcommand{\creflastconjunction}{および} % 3つ以上の参照をつなぐとき
 
 % 見出し横画像の高さ（調整用）
 \newcommand{\chapterartheight}{7.5em}
@@ -662,6 +665,7 @@ $\rho \Delta V$で除すると，
     　\keyword{オイラーの方程式}とは，理想流体 (非粘性流体) の運動を記述する方程式である．
    \begin{equation}
      \frac{\Diff \mathbf{u}}{\Diff t} = -\frac{1}{\rho} \nabla P + \mathbf{g}
+     \label{eq:euler_equation}
    \end{equation}
 \end{definition}
 
@@ -885,7 +889,7 @@ $\rho \Delta V$で除すると，
   \begin{equation}
     \frac{1}{2}\rho u^2 + P + \rho gz = \text{一定}
   \end{equation}
-  ここで，$\rho$は流体の密度，$u$は流速，$P$は圧力，$z$は (基準面からの) 高さである．
+  ここで，$\rho$は流体の密度，$u$は流速，$P$は圧力，$z$は (基準面からの) 高さである． 
 \end{definition}
 
 他方で，第二式に着目しよう．
@@ -1126,8 +1130,141 @@ F.T.E.においてはグレインにはPMMAを，アブレータにはガラス�
 
 \section{流量係数}
 \section{ノズル理論}
+\subsection{等エントロピー流れ}
+まず始めに，熱力学の基礎的な事項を復習しよう．
+知っている人は読み飛ばしても良い．
 
-% this is a pull request test text
+熱力学第1法則は，準静的過程のもとで以下のように表される:
+\begin{equation}
+  \diff E \equiv -\diff'Q + \diff'W = -p \, \diff V + T \, \diff S
+\end{equation}
+ここで，$E$は系の内部エネルギー，$\diff'Q = T \, \diff S$は系が外部から受け取る熱量，$\diff'W = -p \, \diff V$は系が外部に対してする仕事である．
+また，$p$は圧力，$V$は体積，$T$は温度，$S$はエントロピーである．
+
+ここでは，単位質量あたりの物理量を小文字で表すとすると，
+\begin{equation}
+  \diff e = -p \, \diff v + T \, \diff s
+\end{equation}
+となる．
+エントロピー$s$の全微分として整理すると，
+\begin{equation}
+  \diff s = \frac{\diff e}{T} + \frac{p}{T} \, \diff v
+\end{equation}
+となる．
+
+さて，ここで内部エネルギーは取り扱いにくいので，(体積)比熱との間の以下の関係式を用いる:
+\begin{equation}
+  \diff e = c_v \, \diff T
+\end{equation}
+また，理想気体の状態方程式から，$pv = RT$であるから，これを用いて整理すると，
+\begin{equation}
+  \diff s = c_v \frac{\diff T}{T} + R \frac{\diff v}{v}
+\end{equation}
+となる．
+
+これを積分すると，
+\begin{equation}
+  s = c_v \ln T + R \ln v + \text{const.}
+\end{equation}
+となる．さらに状態方程式を用いて$v$を$p$に置き換えると，
+\begin{equation}
+  s = (c_V + R) \ln T - R \ln p + \text{const.}
+  \label{eq:entropy_ideal_gas}
+\end{equation}
+となる．
+
+ここで，理想気体においては$c_v + R = c_p$であって (マイヤーの関係式)，また比熱$\gamma = c_p/c_v$を導入すると，結局\cref{eq:entropy_ideal_gas}は，
+\begin{equation}
+  s = c_p \ln \frac{T}{p^{(\gamma-1) / \gamma}} + \text{const.}  
+  \label{eq:entropy_ideal_gas_final}
+\end{equation}
+となる．
+
+さて，エンジン内のような非常に高速な流れにおいては粘性や熱伝導度が無視できる．
+この場合，外部との熱のやり取りは無く，また内部における摩擦も無いため$\diff'Q = 0$となる．
+すなわち，$\diff s = \diff'Q/T = 0$であって，エントロピーは一定に保たれる．
+このような流れを\keyword{等エントロピー流れ} (Isentropic flow) という．
+
+この場合，\cref{eq:entropy_ideal_gas_final}は零になるから，以下の関係式が成り立つ:
+\begin{equation}
+  \frac{T}{p^{(\gamma-1)/\gamma}} = \text{const.}
+  \label{eq:isentropic_relations}
+\end{equation}
+
+また，この関係式は理想気体の状態方程式を用いて書き換えると，
+\begin{equation}
+  \frac{p}{\rho^{\gamma}} = \text{const.}
+\end{equation}
+となり，全微分形で表すと，
+\begin{equation}
+  \frac{\diff p}{p} - \gamma \frac{\diff \rho}{\rho} = 0
+  \label{eq:dp_drho}
+\end{equation}
+となる．
+
+
+\subsection{ラバール管内の流れ}
+エンジンの様に，管の途中に最小断面部 (咽頭部, スロート; Throat) があるような管内の流れを考えよう．
+このような管を\emph{ラバール管} (Laval tube) 管という．
+
+\enskip
+
+ラバール管について考える前に，より一般の一次元の管内流れについて考えよう．
+ここで1次元というのは厳密な意味ではなく，管の中心軸を$x$軸として，断面ごとに適当に平均した値を代表値として扱うことを意味する．
+このとき，管の断面積を$A(x)$，流速を$u(x)$，密度を$\rho(x)$，圧力を$p(x)$と表すことにしよう．
+
+さて，定常流における流れの連続性を考えれば，各$x$を通過する流体の質量は一定であるから以下の式が従う:
+\begin{equation}
+  \rho A u = \text{const.}
+  \label{eq:continuity_1d}
+\end{equation}
+全微分形で表すと，
+\begin{equation}
+  \frac{\diff \rho}{\rho} + \frac{\diff u}{u} + \frac{\diff A}{A} = 0
+  \label{eq:continuity_1d_diff}
+\end{equation}
+
+また，定常流におけるオイラーの式\ref{eq:euler_equation}を考えると，
+\begin{equation*}
+  u\frac{\diff u}{\diff x} = - \frac{1}{\rho} \frac{\diff p}{\diff x}
+\end{equation*}
+すなわち，
+\begin{equation}
+  u \, \diff u + \frac{1}{\rho} \diff p = 0
+  \label{eq:euler_1d}
+\end{equation}
+となる．
+
+また，これらから音速を求めてみよう．
+音速とは，詰まる所微小な圧力や密度の変化$\diff p$, $\diff \rho$が伝播する速度である．
+ただし，このとき断面積は一定であり，また等エントロピー過程であるとする．
+このとき，\cref{eq:continuity_1d_diff,eq:euler_1d}から，$\diff u$を消去すれば，
+\begin{equation*}
+  u^2 = \left(\frac{\partial p}{\partial \rho}\right)_s
+\end{equation*}
+となる．
+したがって，音波の伝播速度$a$は，
+\begin{equation}
+  a = \sqrt{\left(\frac{\partial p}{\partial \rho}\right)_s}
+  \label{eq:speed_of_sound_general}
+\end{equation}
+等エントロピー流れにおける関係式\ref{eq:dp_drho}を用いれば，
+\begin{equation}
+  a = \sqrt{\gamma \frac{p}{\rho}} = \sqrt{\gamma RT}
+  \label{eq:speed_of_sound_ideal_gas}
+\end{equation}
+となる．
+
+一般に$T$は流速に依存するから，音速も流速に依存する，すなわち場所によって音速が異なることになる．
+流れの速度がその点の音速と等しくなった状態を\emph{臨界状態} (Critical condition) という．
+この状態における物理量をこの章ではアスタリスク ($*$) を右上に付けて表すことにしよう．
+
+
+\enskip
+
+さて，今までに出てきた\cref{eq:dp_drho,eq:continuity_1d_diff,eq:euler_1d}を用いて，管内の流れを記述する方程式を導出しよう．
+まず始めに，音速の式\cref{eq:speed_of_sound_general}と，
+
 
 \bibliography{aero/bib/ref}
 \bibliographystyle{junsrt}
