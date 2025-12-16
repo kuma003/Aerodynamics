@@ -1,0 +1,174 @@
+\documentclass[uplatex,dvipdfmx,a4j,11pt]{jsarticle}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts}
+\usepackage{bm}
+\usepackage{amssymb}
+\usepackage{otf}
+\usepackage{pxrubrica}
+\usepackage{ascmac}
+% \usepackage{wrapfig}
+\usepackage{here}
+\usepackage[hang,small,bf]{caption}
+\usepackage[subrefformat=parens]{subcaption}
+\captionsetup{compatibility=false}
+
+\usepackage{graphicx}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{url}
+\usepackage{siunitx}
+\usepackage[version=4]{mhchem}
+\usepackage{paralist}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+
+\usepackage{fancyhdr}
+% \usepackage{lastpage}
+\fancypagestyle{mypagestyle}{%
+\lhead{}%ヘッダ左を空に
+\rhead{}%ヘッダ右を空に
+% \cfoot{\thepage/\pageref*{LastPage}}%フッタ中央に"今のページ数/総ページ数"を設定
+\renewcommand{\headrulewidth}{0.0pt}%ヘッダの線を消す
+}
+\pagestyle{mypagestyle}
+
+% コマンド定義
+\newcommand{\divergence}{\mathrm{div}\,}  %ダイバージェンス
+\newcommand{\grad}{\mathrm{grad}\,}  %グラディエント
+\newcommand{\rot}{\mathrm{rot}\,}  %ローテーション
+\newcommand{\diff}{\mathrm{d}} % 微分
+\newcommand{\e}{\mathbf{e}} % 単位ベクトル
+
+
+
+\title{Barrowman Method を用いた解析について}
+\date{}
+\author{佐藤 空馬 (14期代空力班長)}
+
+\begin{document}
+\maketitle
+\thispagestyle{mypagestyle}%タイトルページ等ではpagestyleが変更されるので改めて設定する
+
+\section{はじめに}
+Barrowman Method\cite{Barrowman}は，ロケットの空力解析を簡便に行うための解析的・経験的手法である．
+また，同様の手法としてはOpenRocketのドキュメント\cite{OpenRocket}も詳しく，Barrowman Methodを中心に据えて種々の補正を取り入れている．
+本稿は，両者を中心に，ロケットの空力諸元の導出をまとめるものである．
+
+以下，式番号において，Barrowman\cite{Barrowman}と同一のものは(B.0.0)，OpenRocket\cite{OpenRocket}と同一のものは(OR.0.0)と表記する．
+
+\subsection{Barrowman Method}
+Barrowman Methodにおいては，以下の仮定がなされていることに注意が必要である:
+\begin{itemize}
+  \item 迎角は非常に小さい
+  \item 流れは定常 (steady) かつ渦なし (irrotational) (つまりポテンシャル流 (potential flow))
+  \item 機体は剛体
+  \item ノーズコーンの先端は尖っている
+\end{itemize}
+OpenRocketでは，特にモデルロケットを想定しているため，落下時のような迎角が大きい場合についても言及されているが，
+本稿では，この仮定の下で議論を進める．
+
+\section{ノーズコーン/ボディ/テールの法線力・圧力中心}
+ノーズコーンやボディ，テールは軸対称であるため本質的には同様に扱うことができる．
+
+ここでは議論が比較的見通しやすいBarrowmanの方を中心に説明する．
+
+\subsection{亜音速において}
+細長く軸対称な物体においては，単位長さあたり揚力は以下のように表される：
+\begin{equation}
+  n(x) = \rho V \frac{\partial}{\partial x} \left[A(x)w(x)\right]
+  \tag{B.3.57}
+  \label{eq:barrowman_lift}
+\end{equation}
+ここで，$A(x)$は断面積，$w(x)$は機軸に対して垂直な方向の速度成分で，位置$x$には依存せず，
+\begin{equation*}
+  w(x) = V \sin\alpha \approx V\alpha.
+\end{equation*}
+したがって，
+\begin{equation}
+  n(x) = \rho V^2 \alpha \frac{\diff A(x)}{\diff x}
+  \tag{B.3.59}
+\end{equation} 
+となる．
+これからただちに径が変化しない\textbf{ボディ部にはたらく揚力は0となる}ことが分かる．
+
+機体径は滑らかに変化するという仮定の下に，これを全体にわたって積分すると法線力$N$は\footnote{ここからBarrowmanの議論とは少し異なるが本質的に同じである.},
+\begin{equation}
+  N = \int_0^{l } n(x) \,\diff x =  \rho V^2 \alpha [A(l) - A(0)]
+\end{equation}
+となる (ここで$l$は対象とするコンポーネント長さ)．
+したがって，法線力係数は，
+\begin{equation}
+  C_{N} = \frac{N}{\frac{1}{2}\rho V^2 A_\mathrm{ref}} = 2\frac{A(l) - A(0)}{A_\mathrm{ref}} \alpha
+  % \tag{3--60\cite{Barrowman}}
+\end{equation}
+例えば，ノーズコーンなら，$A(0) = 0, A(l) = A_\mathrm{ref}$より，
+\begin{equation}
+  C_{N, \mathrm{nose}} = 2\alpha\footnotemark
+\end{equation}
+\footnotetext{なお，この結果は複素ポテンシャルによって計算された玉木\cite{tamaki} 式$(5\cdot 6)$の結果とも一致する．}
+テールコーンなら，$A(0) = A_\mathrm{ref}, A(l) = 0$より，
+\begin{equation}
+  C_{N, \mathrm{tail}} = - 2 \left(1 - \frac{A(l)}{A_\mathrm{ref}}\right) \alpha
+\end{equation}
+となる．
+
+法線力係数傾斜についてはこれより，
+\begin{equation}
+  C_{N\alpha} = \left.\frac{\partial C_{N}}{\partial \alpha}\right|_{\alpha \to 0} = 2\frac{A(l) - A(0)}{A_\mathrm{ref}}
+  \tag{B.3.65}
+\end{equation}
+つまり，ノーズ法線力係数傾斜は，
+\begin{equation}
+  C_{N\alpha, \mathrm{nose}}  = 2
+\end{equation}
+テール法線力係数傾斜については，
+\begin{equation}
+  C_{N\alpha, \mathrm{tail}} = - 2 \left(1 - \frac{A(l)}{A_\mathrm{ref}}\right)
+\end{equation}
+となる．
+ここで，このことから，\textbf{テールが生み出す法線力は負である}ことがわかる．
+
+また，圧力中心位置については，
+\begin{equation}
+  X_\mathrm{cp} = \frac{\int_0^{l } x n(x) \,\diff x}{\int_0^{l } n(x) \,\diff x}
+  = \frac{[x A(x)]_0^{l } - \int_0^{l } A(x) \,\diff x}{[A(x)]_0^{l }}
+  = \frac{l  A(l ) - \mathrm{Vol}}{A(l ) - A(0)}
+  \tag{OP.3.28}
+\end{equation}
+ここで，$\mathrm{Vol} = \int_0^{l } A(x)\,\diff x$はコンポーネント体積であって，
+ここでは式の形をOpenRocketに合わせている．
+
+つまり，このことから機体全長に対するノーズコーンの圧力中心位置は，
+\begin{equation}
+  \frac{X_{cp, \mathrm{nose}}}{l } = 1 - \frac{\mathrm{Vol}}{A(l ) l }\footnotemark
+\end{equation}
+\footnotetext{この表式は玉木\ref{tamaki}式$(5\cdot 7)$に合わせた．}
+のように表される(テールコーンについてはほぼ同じなので省略)．
+
+\subsubsection{超音速において}
+
+工事中．
+
+いつかかく.
+
+\subsection{フィンの法線力・圧力中心}
+
+ここでは，OpenRocketを参考に説明する．
+
+\enskip
+
+1枚のフィンが生み出す法線力係数傾斜はDiederichの半経験的式によって与えられる:
+\begin{equation}
+  (C_{N_\alpha})_1 = \frac{C_{N_\alpha0}F_D (\frac{A_\mathrm{fin}}{A_\mathrm{ref}}\cos\Gamma)}{2 + F_D \sqrt{1 + \frac{4}{F_D^2}}}
+  \tag{OR.3.37}
+\end{equation}
+
+
+
+
+
+
+\end{document}
