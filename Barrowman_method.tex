@@ -7,6 +7,7 @@
 \usepackage{otf}
 \usepackage{pxrubrica}
 \usepackage{ascmac}
+\usepackage{ar}
 % \usepackage{wrapfig}
 \usepackage{here}
 \usepackage[hang,small,bf]{caption}
@@ -24,6 +25,15 @@
 \usepackage{multirow}
 \usepackage[dvipdfmx]{hyperref}
 \usepackage{pxjahyper}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{equation}{式}{式}
+\crefname{table}{表}{表}
+\crefname{section}{節}{節}
+\newcommand{\crefpairconjunction}{と}
+\newcommand{\crefrangeconjunction}{から}
+\newcommand{\crefmiddleconjunction}{，}
+\newcommand{\creflastconjunction}{, および}
 
 \usepackage{fancyhdr}
 % \usepackage{lastpage}
@@ -162,16 +172,16 @@ OpenRocketでは特にモデルロケットのようなケースを想定して�
 
 1枚のフィンが生み出す法線力係数傾斜はDiederichの半経験的式によって与えられる:
 \begin{equation}
-  (C_{N_\alpha})_1 = \frac{C_{N_\alpha0}F_D (\frac{A_\mathrm{fin}}{A_\mathrm{ref}}\cos\Gamma)}{2 + F_D \sqrt{1 + \frac{4}{F_D^2}}}
+  (C_{N_\alpha})_1 = \frac{C_{N_{\alpha0}}F_\mathrm{D} (\frac{A_\mathrm{fin}}{A_\mathrm{ref}}\cos\Gamma_\mathrm{c})}{2 + F_\mathrm{D} \sqrt{1 + \frac{4}{F_\mathrm{D}^2}}}
   \tag{OR.3.37}
 \end{equation}
 ここで，
-\begin{enumerate}
-  \item $C_{N_\alpha0}$: 2次元平板の法線力係数
-  \item $F_D$: Diederichの形状補正係数
+\begin{itemize}
+  \item $C_{N_{\alpha0}}$: 2次元平板の法線力係数
+  \item $F_\mathrm{D}$: Diederichの形状補正係数
   \item $A_\mathrm{fin}$: フィン面積
-  \item $\Gamma$: 中点の角度 (\cref)
-\end{enumerate}
+  \item $\Gamma_\mathrm{c}$: 中点の角度 (\cref{fig:fin_geometry}参照)
+\end{itemize}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.4\linewidth]{Barrowman/img/fin_geometry.pdf}
@@ -179,8 +189,22 @@ OpenRocketでは特にモデルロケットのようなケースを想定して�
   \label{fig:fin_geometry}
 \end{figure}
 
+ポテンシャル流から求められる2次元平板の法線力係数$2\pi$に，圧縮性流体に対する補正: Prandtl-Glauert補正を施して，
+\begin{equation}
+  C_{N_{\alpha0}} = \frac{2\pi}{\sqrt{1 - M^2}} = \frac{2\pi}{\beta}
+  \tag{OR.3.38}
+\end{equation}
+である．
 
+また，Diederichの形状補正係数$F_\mathrm{D}$は，次で与えられる:
+\begin{equation}
+  F_\mathrm{D} = \frac{\AR}{\frac{1}{2}C_{N_{\alpha0}}\cos\Gamma_\mathrm{c}}
+  \tag{OR.3.39}
+\end{equation}
+ここで，$\AR$はフィンのアスペクト比であって，$\AR \equiv 2s^2/A_\mathrm{fin}$である．
 
-
-
+以上の式を用いて整理すると，
+\begin{equation}
+  (C_{N_\alpha})_1 = \frac{2\pi \frac{s^2}{A_\mathrm{ref}}}{1 + \sqrt{1 + \left(\frac{\beta s^2}{A_\mathrm{fin}\cos\Gamma_\mathrm{c}}\right)^2}}
+\end{equation}
 \end{document}
