@@ -55,7 +55,7 @@
 \section{はじめに}
 Barrowman Method\cite{Barrowman}は，ロケットの空力解析を簡便に行うための解析的・経験的手法である．
 また，同様の手法としてはOpenRocketのドキュメント\cite{OpenRocket}も詳しく，Barrowman Methodを中心に据えて種々の補正を取り入れている．
-本稿は，両者を中心に，ロケットの空力諸元の導出をまとめるものである．
+本稿は，両者を中心にロケットの空力諸元の導出をまとめるものである．
 
 以下，式番号において，Barrowman\cite{Barrowman}と同一のものは(B.0.0)，OpenRocket\cite{OpenRocket}と同一のものは(OR.0.0)と表記する．
 
@@ -67,8 +67,8 @@ Barrowman Methodにおいては，以下の仮定がなされていることに�
   \item 機体は剛体
   \item ノーズコーンの先端は尖っている
 \end{itemize}
-OpenRocketでは，特にモデルロケットを想定しているため，落下時のような迎角が大きい場合についても言及されているが，
-本稿では，この仮定の下で議論を進める．
+OpenRocketでは特にモデルロケットのようなケースを想定しているため，落下時のような迎角が大きい場合についても言及されているが，
+本稿ではこの仮定の下で議論を進める．
 
 \section{ノーズコーン/ボディ/テールの法線力・圧力中心}
 ノーズコーンやボディ，テールは軸対称であるため本質的には同様に扱うことができる．
@@ -165,7 +165,19 @@ OpenRocketでは，特にモデルロケットを想定しているため，落�
   (C_{N_\alpha})_1 = \frac{C_{N_\alpha0}F_D (\frac{A_\mathrm{fin}}{A_\mathrm{ref}}\cos\Gamma)}{2 + F_D \sqrt{1 + \frac{4}{F_D^2}}}
   \tag{OR.3.37}
 \end{equation}
-
+ここで，
+\begin{enumerate}
+  \item $C_{N_\alpha0}$: 2次元平板の法線力係数
+  \item $F_D$: Diederichの形状補正係数
+  \item $A_\mathrm{fin}$: フィン面積
+  \item $\Gamma$: 中点の角度 (\cref)
+\end{enumerate}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.4\linewidth]{Barrowman/img/fin_geometry.pdf}
+  \caption{フィンの幾何学的パラメータ．}
+  \label{fig:fin_geometry}
+\end{figure}
 
 
 
