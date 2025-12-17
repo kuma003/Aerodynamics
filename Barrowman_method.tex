@@ -189,7 +189,7 @@ OpenRocketでは特にモデルロケットのようなケースを想定して�
   \label{fig:fin_geometry}
 \end{figure}
 
-ポテンシャル流から求められる2次元平板の法線力係数$2\pi$に，圧縮性流体に対する補正: Prandtl-Glauert補正を施して，
+ポテンシャル流から求められる2次元平板の法線力係数$2\pi$に，圧縮性流体に対する補正 (Prandtl-Glauert補正) を施して，
 \begin{equation}
   C_{N_{\alpha0}} = \frac{2\pi}{\sqrt{1 - M^2}} = \frac{2\pi}{\beta}
   \tag{OR.3.38}
@@ -206,5 +206,72 @@ OpenRocketでは特にモデルロケットのようなケースを想定して�
 以上の式を用いて整理すると，
 \begin{equation}
   (C_{N_\alpha})_1 = \frac{2\pi \frac{s^2}{A_\mathrm{ref}}}{1 + \sqrt{1 + \left(\frac{\beta s^2}{A_\mathrm{fin}\cos\Gamma_\mathrm{c}}\right)^2}}
+  \tag{OR.3.40}
 \end{equation}
+
+なお，F.T.E.の審査書でよく使う形式では，$A_\mathrm{fin} = \pi d^2/4$, $s/\cos\Gamma_\mathrm{c} = L_\mathrm{mc}$ (中点長. \cref{fig:fin_geometry}参照) ，
+$A_\mathrm{fin} = (L_\mathrm{t} + L_\mathrm{r})s/2$ (台形フィンの場合) として，
+\begin{equation}
+  (C_{N_\alpha})_1 = \frac{8 \left(\frac{L_\mathrm{mc}}{d}\right)^2}{1 + \sqrt{1 + \left(\frac{2 L_\mathrm{mc}}{(L_\mathrm{t} + L_\mathrm{r})}\right)^2}}
+  \tag{OR.3.41}
+\end{equation}
+
+次に，フィンが$N$枚ある場合を考える．
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.35\linewidth]{Barrowman/img/fin_backword.pdf}
+  \caption{フィンの迎角と横風成分．}
+  \label{fig:fin_backword}
+\end{figure}
+このとき，\cref{fig:fin_backword}に示すように，横風に対してそれぞれの迎角は$\alpha_i = \alpha\sin\Lambda_i$となるから，法線力係数$(C_{N_\alpha})_{\Lambda_i}$は，
+\begin{equation}
+  (C_{N_\alpha})_{\Lambda_i} = (C_{N_\alpha})_1 \sin^2\Lambda_i
+  \tag{OR.3.51}
+\end{equation}
+となる (横風に対して垂直な法線方向の力を考えるので，$\sin\Lambda_i$がさらにかけられていることに注意)．
+
+したがって，$n$枚のフィン全体での法線力係数傾斜は，
+\begin{equation}
+  (C_{N_\alpha})_N = \sum_{i=1}^{n} (C_{N_\alpha})_{\Lambda_i} = (C_{N_\alpha})_1 \sum_{i=1}^{n} \sin^2\Lambda_i
+  \tag{OR.3.52}
+\end{equation}
+
+ここで，$\sin^2$の和について，
+\begin{equation}
+  \sum_{i=1}^{n} \sin^2\Lambda_i = \frac{n}{2}
+  \tag{OR.3.53}
+\end{equation}
+が成り立つので，最終的にフィン全体の法線力係数傾斜は，
+\begin{equation}
+  (C_{N_\alpha})_N = \frac{n}{2}(C_{N_\alpha})_1
+\end{equation}
+となる．
+
+なお，多数のフィン ($n > 4$) の場合はフィン同士の干渉によって必ずしも$n/2$のファクターで法線力は増加しない．
+詳細についてはOpenRocket\cite{OpenRocket}を参照されたい．
+
+\enskip
+
+最後に，フィン--ボディ間の干渉効果を考慮する．
+これは，以下のような形で近似される:
+\begin{equation}
+  (C_{N_\alpha})_{T(B)} = K_{T(B)} (C_{N_\alpha})_N = \left(1 + \frac{r}{s + r}\right) (C_{N_\alpha})_N
+  \tag{OR.3.56}
+\end{equation}
+もちろん，1枚フィンあたりの法線力係数傾斜$(C_{N_\alpha})_1$についても同様に補正される．
+
+
+\enskip
+
+次に，圧力中心について考える．
+
+台形フィンの場合，気軸方向の圧力中心は，
+MAC (Mean Aerodynamic Chord) 上の前方から$25\%$の位置にあるとされる．
+したがって，
+\begin{equation}
+  X_{\mathrm{cp, fin}} = \frac{X_\mathrm{t}}{3}\frac{C_\mathrm{r} + 2C_\mathrm{t}}{C_\mathrm{r} + C_\mathrm{t}} + \frac{1}{6}\frac{C_\mathrm{r}^2 + C_\mathrm{t}^2 + C_\mathrm{r}C_\mathrm{t}}{C_\mathrm{r} + C_\mathrm{t}}
+  \tag{OR.3.34}
+\end{equation}
+これは，フィン根本前端位置からの距離であるので，機体先端からの距離に変換するには，フィン根本前端位置を加える必要があることに注意されたい．
+
 \end{document}
