@@ -7,11 +7,16 @@ on:
     paths:
       - aero.tex
       - aero/**
+      - pages/**
       - .github/workflows/build-aero.yml
   workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -51,3 +56,29 @@ jobs:
           path: build/aero.pdf
           if-no-files-found: error
           retention-days: 90
+
+      - name: Prepare GitHub Pages site
+        run: |
+          mkdir --parents site
+          cp build/aero.pdf site/aero.pdf
+          cp pages/index.html site/index.html
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

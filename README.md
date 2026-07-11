@@ -5,7 +5,7 @@
 引継ぎ資料は以下の4つから構成されます．  
 このうち，英訳版についてはAIによる翻訳なので参考程度に見てください．
 
-- [【メイン資料】空気力学の基礎 (仮称)](aero.tex)（PDFは[GitHub Actions](../../actions/workflows/build-aero.yml)から取得）
+- [【メイン資料】空気力学の基礎 (仮称)](https://kuma003.github.io/Aerodynamics/)（ブラウザで閲覧）
 - [【メイン資料 (英訳版)】Fundamentals of Aerodynamics (仮称)](docs/aero_en.pdf)  
 - [【補助資料】減衰モーメント係数について](docs/damping_moment.pdf)
 - [【補助資料】壁面粗さと壁面y+値について](docs/wall_function.pdf)
@@ -20,7 +20,7 @@
 ## PDFの自動ビルド
 
 `main` ブランチへのpush時にGitHub Actionsが `aero.tex` をビルドします．
-生成されたPDFは各実行の `aero-pdf` artifact として90日間保存されるため，Actionsの該当実行画面からダウンロードできます．
+PDFは [GitHub Pages](https://kuma003.github.io/Aerodynamics/) でブラウザから直接閲覧でき，PDF本体は各実行の `aero-pdf` artifact として90日間ダウンロード可能です．
 `aero.pdf` 本体やLaTeXの補助ファイルをコミットする必要はありません．
 
 LaTexの環境構築については各自調べて導入にしてください．

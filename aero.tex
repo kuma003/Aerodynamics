@@ -1,6 +1,7 @@
 \documentclass[uplatex,dvipdfmx,a4j,11pt]{jsreport}
 
-\usepackage{otf}
+\usepackage[deluxe]{otf}
+\usepackage[haranoaji]{pxchfon}
 \usepackage{newtxtext}
 \usepackage[utf8]{inputenc}
 \usepackage[dvipdfmx]{graphicx,xcolor}
@@ -154,7 +155,7 @@
 
 % 章題のスタイル変更
 \titleformat{\chapter}[block] 
-  {\normalfont\sffamily}{}{0pt} {
+  {\normalfont\rmfamily}{}{0pt} {
     \parbox[b]{\textwidth}{
       {\fontsize{4em}{48pt}\selectfont 第 {\thechapter} 章.} \quad {\Huge #1}
       \hfill \chapterart\\[-10pt]
@@ -163,7 +164,7 @@
 }
 
 \titleformat{name=\chapter,numberless}[block] % 章番号がない場合 (目次, 付録, etc.)
-  {\sffamily}{}{0pt} {
+  {\normalfont\rmfamily}{}{0pt} {
     \parbox[b]{\textwidth}{
       {\Huge #1}\\[-10pt]
     \rule{\textwidth}{1pt}
@@ -179,7 +180,7 @@
     \markboth{付録 {\thechapter}. ##1}{}}
   \renewcommand{\thechapter}{\Alph{chapter}}
   \titleformat{\chapter}[block] 
-    {\normalfont\sffamily}{}{0pt} {
+    {\normalfont\rmfamily}{}{0pt} {
       \parbox[b]{\textwidth}{
         {\fontsize{4em}{48pt}\selectfont 付録 {\thechapter}.} \quad {\Huge ##1}\\[-10pt]
         \rule{\textwidth}{1pt}
