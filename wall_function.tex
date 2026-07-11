@@ -1,5 +1,7 @@
 \documentclass[uplatex,dvipdfmx,a4j,12pt]{jsarticle}
 
+\usepackage[deluxe]{otf}
+\usepackage[haranoaji]{pxchfon}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{amsmath}
@@ -13,6 +15,7 @@
 \usepackage{multirow}
 \usepackage[dvipdfmx]{hyperref}
 \usepackage{pxjahyper}
+\hypersetup{hidelinks}
 \usepackage{here}
 \usepackage{subcaption}
 
@@ -253,7 +256,7 @@ $K_s^+$の計算式は，\texttt{density * 0.09 \^\, 0.25 * 6 * 10 \^\, ( - 5) *
   \label{fig:velocity_2}
 \end{figure}
 
-抗力係数について，適切にメッシュを設定した場合 (図\ref{fig:4_1_cd}) と比較した結果を図\ref{fig:4_1_cd_wo_rough}, 図\ref{fig:4_2_cd_w_rough}に示す．
+抗力係数について，適切にメッシュを設定した場合 (図\ref{fig:4_1_cd}) と比較した結果を図\ref{fig:4_2_cd_wo_rough}, 図\ref{fig:4_2_cd_w_rough}に示す．
 表面粗さを考慮する場合/しない場合の両方において圧力抗力係数に大きな変化は見られなかったが，粘性抗力係数は不適切なインフレーション厚さにおいて大きく減少した．
 これは，インフレーション厚さが薄いために，特にインフレーション最外部--境界層最外部間において速度勾配が緩やかになったことに起因すると考えられる．
 

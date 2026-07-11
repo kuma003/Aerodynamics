@@ -54,7 +54,7 @@
   enhanced,
   title=定義~\if #4(#4)\else \thetcbcounter\fi~ #2,
   #1,
-  label = def:#3
+  phantom={\ifstrempty{#3}{}{\label{def:#3}}}
 }
 
 \newtcolorbox[auto counter, number within=chapter, crefname = {注意}{注意}]{remark}[4][]{
@@ -70,7 +70,7 @@
   enhanced,
   title=注意~\if #4(#4)\else \thetcbcounter\fi~ #2,
   #1,
-  label = rem:#3
+  phantom={\ifstrempty{#3}{}{\label{rem:#3}}}
 }
 
 \newtcolorbox[auto counter, number within=chapter, crefname = {余談}{余談}]{aside}[4][]{
@@ -85,8 +85,12 @@
   breakable,
   title=余談~\if #4(#4)\else \thetcbcounter\fi~ #2,
   #1,
-  label = aside:#3
+  phantom={\ifstrempty{#3}{}{\label{aside:#3}}}
 }
+
+\crefname{tcb@cnt@definition}{定義}{定義}
+\crefname{tcb@cnt@remark}{注意}{注意}
+\crefname{tcb@cnt@aside}{余談}{余談}
 
 % コマンド定義
 \newcommand{\keyword}[1]{\textcolor{mainblue}{\textbf{#1}}}
