@@ -1,12 +1,15 @@
-name: Build aero.pdf
+name: Build and publish PDFs
 
 on:
   push:
     branches:
       - main
     paths:
-      - aero.tex
+      - "*.tex"
       - aero/**
+      - Barrowman/**
+      - damping_moment/**
+      - wall_function/**
       - pages/**
       - .github/workflows/build-aero.yml
   workflow_dispatch:
@@ -36,31 +39,40 @@ jobs:
             texlive-latex-extra \
             texlive-science
 
-      - name: Build aero.pdf
+      - name: Build PDFs
         run: |
           mkdir --parents build
-          latexmk -pdfdvi \
-            -outdir=build \
-            -interaction=nonstopmode \
-            -halt-on-error \
-            -file-line-error \
-            -e '$latex = "uplatex %O %S"' \
-            -e '$bibtex = "pbibtex %O %S"' \
-            -e '$dvipdf = "dvipdfmx %O -o %D %S"' \
+          documents=(
             aero.tex
+            aero_en.tex
+            Barrowman_method.tex
+            damping_moment.tex
+            wall_function.tex
+          )
+          for document in "${documents[@]}"; do
+            latexmk -pdfdvi \
+              -outdir=build \
+              -interaction=nonstopmode \
+              -halt-on-error \
+              -file-line-error \
+              -e '$latex = "uplatex %O %S"' \
+              -e '$bibtex = "pbibtex %O %S"' \
+              -e '$dvipdf = "dvipdfmx %O -o %D %S"' \
+              "$document"
+          done
 
-      - name: Upload PDF artifact
+      - name: Upload PDF artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: aero-pdf
-          path: build/aero.pdf
+          name: aerodynamics-pdfs
+          path: build/*.pdf
           if-no-files-found: error
           retention-days: 90
 
       - name: Prepare GitHub Pages site
         run: |
           mkdir --parents site
-          cp build/aero.pdf site/aero.pdf
+          cp build/*.pdf site/
           cp pages/index.html site/index.html
 
       - name: Upload GitHub Pages artifact

@@ -1,62 +1,54 @@
 # Aerodynamics
-14期代空力班の引継ぎ資料
 
-# ファイル
-引継ぎ資料は以下の4つから構成されます．  
-このうち，英訳版についてはAIによる翻訳なので参考程度に見てください．
+14期代空力班の引継ぎ資料です．
 
-- [【メイン資料】空気力学の基礎 (仮称)](https://kuma003.github.io/Aerodynamics/)（ブラウザで閲覧）
-- [【メイン資料 (英訳版)】Fundamentals of Aerodynamics (仮称)](docs/aero_en.pdf)  
-- [【補助資料】減衰モーメント係数について](docs/damping_moment.pdf)
-- [【補助資料】壁面粗さと壁面y+値について](docs/wall_function.pdf)
+## 資料
 
+- [【メイン資料】空気力学の基礎（仮称）](https://kuma003.github.io/Aerodynamics/aero.pdf)
+- [【メイン資料・英訳版】Fundamentals of Aerodynamics](https://kuma003.github.io/Aerodynamics/aero_en.pdf)
+- [【補助資料】Barrowman Methodを用いた解析について](https://kuma003.github.io/Aerodynamics/Barrowman_method.pdf)
+- [【補助資料】減衰モーメント係数について](https://kuma003.github.io/Aerodynamics/damping_moment.pdf)
+- [【補助資料】壁面粗さと壁面y+値について](https://kuma003.github.io/Aerodynamics/wall_function.pdf)
 
-# 改訂者へ
-全てLaTex (upLaTex) で作成しています．
-また，VS Code上でLatex Workshopを用いて執筆するのを想定しています．
-この場合，保存時に自動でビルドし，生成ファイルがdocsディレクトリに出力されます ([settings.json](.vscode/settings.json)参照) ．
-ローカルで生成される `docs/aero.pdf` はGitで管理しません．
+英訳版はAIによる翻訳を含むため，参考資料として利用してください．
 
-## PDFの自動ビルド
+## PDFの公開
 
-`main` ブランチへのpush時にGitHub Actionsが `aero.tex` をビルドします．
-PDFは [GitHub Pages](https://kuma003.github.io/Aerodynamics/) でブラウザから直接閲覧でき，PDF本体は各実行の `aero-pdf` artifact として90日間ダウンロード可能です．
-`aero.pdf` 本体やLaTeXの補助ファイルをコミットする必要はありません．
+`main` ブランチへpushすると，GitHub Actionsが全資料をビルドし，[GitHub Pages](https://kuma003.github.io/Aerodynamics/)へ公開します．生成されたPDFは，Actionsの `aerodynamics-pdfs` artifactからも90日間ダウンロードできます．
 
-LaTexの環境構築については各自調べて導入にしてください．
-未検証ですが環境構築が手間な場合は [Overleaf](https://www.overleaf.com/) でも編集できると思います．
+PDF本体とLaTeXの補助ファイルはGitで管理しません．ソースの `.tex`，参考文献，画像など，文書の生成に必要なファイルだけをコミットしてください．
 
-可能ならこのrepositoryをforkしてから修正するのを推奨します．
-この場合，pull requestを送ってくれたら対応します（気付いていない場合はご連絡ください）．
+## 改訂方法
 
-以下に，大まかな手順等を紹介します．
-### 1. ウェブページでの作業①
-1. githubのアカウントを作成する
-2. [このページ](https://github.com/kuma003/Aerodynamics.git) の右上にあるForkボタンから，このリポジトリをforkします
-3. 自身のforkしたリポジトリで右上緑色のCodeボタンをクリックし，`https://github.com/(username)/Aerodynamics.git` のようなURLを確認してコピーします
+各資料はupLaTeXで作成しています．VS CodeとLaTeX Workshopを使う場合，保存時に自動ビルドされ，生成物は `docs` ディレクトリへ出力されます．設定の詳細は [.vscode/settings.json](.vscode/settings.json) を参照してください．
 
-### 2. ローカルでの作業
-1. コマンドプロンプト (or PowerShell) を開く
-2. `cd (保存先のディレクトリのパス)`でカレントディレクトリを変更する
- (1, 2については，ファイルエクスプローラで保存先のディレクトリを開き，上のパスが表示される小窓に`cmd`と入力してもokです)
-3. `git clone https://github.com/(username)/Aerodynamics.git` でファイルをコピー
-4. `cd Aerodynamics` で移動
-5. 編集する.  Overleafを使う場合も，texファイルと必要な素材のみを更新する．
-6. 以下のコマンドで変更したファイルを全部コミット・プッシュ
- ```
- git add (変更したファイルパス，面倒なら . (ピリオド)で変更したファイル全指定) 
- git commit -m (コミットメッセージ)
- git push
- ```
+ローカルにLaTeX環境を用意できない場合は [Overleaf](https://www.overleaf.com/) も利用できますが，本リポジトリの構成での動作は未検証です．
 
-### 3. ウェブページでの作業②
-1. 自分のリポジトリを開き，左上のボタンからPull requestsのページに飛びます．
-2. New pull requestから，pull requestを作成して送信します．タイトルや説明文は任意です．
+変更を提案する場合は，このリポジトリをforkしてPull Requestを送る方法を推奨します．
 
-以上で終わりです．
+### 1. リポジトリをforkする
 
+1. GitHubアカウントを作成します．
+2. [このリポジトリ](https://github.com/kuma003/Aerodynamics)を開き，右上の「Fork」から自分のアカウントへforkします．
+3. fork先の「Code」からURLをコピーします．URLは `https://github.com/<username>/Aerodynamics.git` の形式です．
 
+### 2. ローカルで編集する
 
+```console
+git clone https://github.com/<username>/Aerodynamics.git
+cd Aerodynamics
+```
 
-今後も内容が精査・修正され，適切に知識が継承・発展されていくことを願ってやみません．
+編集後は，意図した変更だけをステージしてコミットします．
 
+```console
+git add <変更したファイル>
+git commit -m "変更内容を表すメッセージ"
+git push
+```
+
+### 3. Pull Requestを作成する
+
+fork先の「Pull requests」から「New pull request」を選び，変更内容と理由を記載して送信してください．
+
+今後も内容が精査・修正され，知識が適切に継承・発展されていくことを願っています．
