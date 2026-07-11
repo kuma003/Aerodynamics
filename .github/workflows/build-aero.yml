@@ -28,7 +28,8 @@ jobs:
             latexmk \
             texlive-fonts-extra \
             texlive-lang-japanese \
-            texlive-latex-extra
+            texlive-latex-extra \
+            texlive-science
 
       - name: Build aero.pdf
         run: |
