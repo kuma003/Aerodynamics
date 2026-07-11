@@ -5,7 +5,7 @@
 引継ぎ資料は以下の4つから構成されます．  
 このうち，英訳版についてはAIによる翻訳なので参考程度に見てください．
 
-- [【メイン資料】空気力学の基礎 (仮称)](docs/aero.pdf)
+- [【メイン資料】空気力学の基礎 (仮称)](aero.tex)（PDFは[GitHub Actions](../../actions/workflows/build-aero.yml)から取得）
 - [【メイン資料 (英訳版)】Fundamentals of Aerodynamics (仮称)](docs/aero_en.pdf)  
 - [【補助資料】減衰モーメント係数について](docs/damping_moment.pdf)
 - [【補助資料】壁面粗さと壁面y+値について](docs/wall_function.pdf)
@@ -15,6 +15,13 @@
 全てLaTex (upLaTex) で作成しています．
 また，VS Code上でLatex Workshopを用いて執筆するのを想定しています．
 この場合，保存時に自動でビルドし，生成ファイルがdocsディレクトリに出力されます ([settings.json](.vscode/settings.json)参照) ．
+ローカルで生成される `docs/aero.pdf` はGitで管理しません．
+
+## PDFの自動ビルド
+
+`main` ブランチへのpush時にGitHub Actionsが `aero.tex` をビルドします．
+生成されたPDFは各実行の `aero-pdf` artifact として90日間保存されるため，Actionsの該当実行画面からダウンロードできます．
+`aero.pdf` 本体やLaTeXの補助ファイルをコミットする必要はありません．
 
 LaTexの環境構築については各自調べて導入にしてください．
 未検証ですが環境構築が手間な場合は [Overleaf](https://www.overleaf.com/) でも編集できると思います．
@@ -34,7 +41,7 @@ LaTexの環境構築については各自調べて導入にしてください．
  (1, 2については，ファイルエクスプローラで保存先のディレクトリを開き，上のパスが表示される小窓に`cmd`と入力してもokです)
 3. `git clone https://github.com/(username)/Aerodynamics.git` でファイルをコピー
 4. `cd Aerodynamics` で移動
-5. 編集する.  Overleafを使うなら，編集後適宜texファイルやpdfを更新する．
+5. 編集する.  Overleafを使う場合も，texファイルと必要な素材のみを更新する．
 6. 以下のコマンドで変更したファイルを全部コミット・プッシュ
  ```
  git add (変更したファイルパス，面倒なら . (ピリオド)で変更したファイル全指定) 

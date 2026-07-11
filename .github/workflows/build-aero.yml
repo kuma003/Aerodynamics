@@ -1,0 +1,52 @@
+name: Build aero.pdf
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - aero.tex
+      - aero/**
+      - .github/workflows/build-aero.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install upLaTeX toolchain
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes \
+            latexmk \
+            texlive-fonts-extra \
+            texlive-lang-japanese \
+            texlive-latex-extra
+
+      - name: Build aero.pdf
+        run: |
+          mkdir --parents build
+          latexmk -pdfdvi \
+            -outdir=build \
+            -interaction=nonstopmode \
+            -halt-on-error \
+            -file-line-error \
+            -e '$latex = "uplatex %O %S"' \
+            -e '$bibtex = "pbibtex %O %S"' \
+            -e '$dvipdf = "dvipdfmx %O -o %D %S"' \
+            aero.tex
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: aero-pdf
+          path: build/aero.pdf
+          if-no-files-found: error
+          retention-days: 90
